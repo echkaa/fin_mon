@@ -13,7 +13,7 @@ class OperationController extends AbstractController
 {
     /**
      * @Route("/v1/operation", name="operation_list", methods={"GET"})
-     * @OA\Post(summary="List of Operations")
+     * @OA\Get(summary="List of Operations")
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @throws ExceptionInterface
      */
