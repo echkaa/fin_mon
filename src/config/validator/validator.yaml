@@ -1,0 +1,6 @@
+# config/validator/validation.yaml
+App\Domain\Entity\Operation:
+    properties:
+        amount:
+            - NotBlank: ~
+            - PositiveOrZero: ~
