@@ -28,9 +28,5 @@ services:
             - { name: kernel.event_listener, event: kernel.exception }
             - { name: kernel.event_listener, event: kernel.response }
 
-    App\Application\Security\Authorization\AuthChecked:
-        tags:
-            - { name: 'jose.checker.claim', alias: 'auth_user_claim' }
-
     App\Domain\Contract\Verification\VerifyUserCredentialsInterface:
         class: 'App\Application\Security\Authorization\VerifyUserCredentials'
