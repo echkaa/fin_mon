@@ -12,7 +12,7 @@ class TokenTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request(
-            method: 'GET',
+            method: 'POST',
             uri: $this->uri,
             parameters: []
         );
@@ -24,7 +24,7 @@ class TokenTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request(
-            method: 'GET',
+            method: 'POST',
             uri: $this->uri,
             parameters: [
                 'client_id' => 'd1befa03c79ca0b84ecc488dea96bc68',

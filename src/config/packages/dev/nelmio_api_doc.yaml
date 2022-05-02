@@ -1,0 +1,15 @@
+nelmio_api_doc:
+    areas:
+        path_patterns: # an array of regexps
+            - ^/v(?!/doc$)
+
+    documentation:
+        info:
+            title: Financial monitoring (DOC)
+            version: 0.0.1
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT

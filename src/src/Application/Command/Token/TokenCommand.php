@@ -15,9 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         "password",
  *     },
  *     example={
- *         "id": 100500,
  *         "client_id": "d1befa03c79ca0b84ecc488dea96bc68",
- *         "username": "kava_oleksii",
+ *         "username": "oleksii_kava",
  *         "password": "mypassword",
  *         "scope": "one of available scopes",
  *     }
