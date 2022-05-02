@@ -52,6 +52,8 @@ class KernelListener
     {
         $error = $event->getThrowable();
 
+        dd($error);
+
         $event->setResponse(
             (new JsonResponse())->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)->setContent(
                 $this->serializer->serialize([

@@ -24,7 +24,6 @@ class OperationListHandler implements MessageHandlerInterface
 
         return new HttpResponse(
             status: Response::HTTP_OK,
-            headers: [],
             body: json_encode($operations)
         );
     }

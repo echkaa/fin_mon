@@ -1,0 +1,24 @@
+security:
+    enable_authenticator_manager: true
+
+    providers:
+        jwt:
+            lexik_jwt: ~
+
+    firewalls:
+        login:
+            pattern: /v1/token
+            stateless: true
+            json_login:
+                check_path: /v1/token
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/v1
+            stateless: true
+            jwt: ~
+
+    access_control:
+        - { path: ^/v1/token, roles: PUBLIC_ACCESS }
+        - { path: ^/v1, roles: IS_AUTHENTICATED_FULLY }

@@ -17,7 +17,6 @@ class OperationStoreHandler implements MessageHandlerInterface
     {
         return new HttpResponse(
             status: Response::HTTP_CREATED,
-            headers: [],
             body: json_encode([])
         );
     }
