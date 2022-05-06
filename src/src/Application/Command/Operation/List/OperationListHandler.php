@@ -2,29 +2,32 @@
 
 namespace App\Application\Command\Operation\List;
 
-use App\Application\Repository\OperationRepository;
+use App\Application\Service\OperationService;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class OperationListHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationRepository $operationRepository
-    ) { }
+        private OperationService $operationService,
+        private SerializerInterface $serializer,
+    ) {
+    }
 
     /**
      * @throws Exception
      */
     public function __invoke(OperationListCommand $command): ResponseInterface
     {
-        $operations = $this->operationRepository->findAll();
+        $operations = $this->operationService->all();
 
         return new HttpResponse(
             status: Response::HTTP_OK,
-            body: json_encode($operations)
+            body: $this->serializer->serialize($operations, 'json')
         );
     }
 }

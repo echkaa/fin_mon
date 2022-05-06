@@ -3,22 +3,21 @@
 namespace App\Domain\Entity;
 
 use App\Application\Repository\UserRepository;
+use App\Domain\Contract\Entity\EntityInterface;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface
+class User implements UserInterface, EntityInterface
 {
     const USER_ROLE = 'USER_ROLE';
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
     #[ORM\Column(type: 'string', unique: true)]
     public $client_id;
-
     #[ORM\Column(type: 'string', unique: true)]
     private $username;
 
@@ -69,12 +68,12 @@ class User implements UserInterface
 
     public function onPrePersist()
     {
-        $this->created = new \DateTime("now");
+        $this->created = new DateTime("now");
     }
 
     public function onPreUpdate()
     {
-        $this->updated = new \DateTime("now");
+        $this->updated = new DateTime("now");
     }
 
     public function getRoles(): array

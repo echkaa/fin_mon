@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Command\Operation\Store;
+namespace App\Application\Command\Operation\Update;
 
 use App\Application\Service\OperationService;
 use Exception;
@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class OperationStoreHandler implements MessageHandlerInterface
+class OperationUpdateHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OperationService $operationService,
@@ -19,12 +19,12 @@ class OperationStoreHandler implements MessageHandlerInterface
     /**
      * @throws Exception
      */
-    public function __invoke(OperationStoreCommand $command): ResponseInterface
+    public function __invoke(OperationUpdateCommand $command): ResponseInterface
     {
-        $this->operationService->storeByCommand($command);
+        $this->operationService->updateByCommand($command);
 
         return new HttpResponse(
-            status: Response::HTTP_CREATED,
+            status: Response::HTTP_OK,
             body: json_encode([])
         );
     }

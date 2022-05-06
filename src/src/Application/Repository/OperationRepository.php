@@ -12,20 +12,4 @@ class OperationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Operation::class);
     }
-
-    public function add(Operation $entity, bool $flush = true): void
-    {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    public function remove(Operation $entity, bool $flush = true): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
 }
