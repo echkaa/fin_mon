@@ -12,4 +12,15 @@ class OperationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Operation::class);
     }
+
+    public function getStatistic(): array
+    {
+        return $this->createQueryBuilder('op')
+            ->select([
+                'SUM(op.amount) as summa',
+                'COUNT(op.id) as count_operation',
+            ])
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

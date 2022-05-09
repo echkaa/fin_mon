@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Command\Operation\Delete;
+namespace App\Application\Command\Statistic\Operation;
 
-use App\Application\Service\OperationService;
+use App\Application\Repository\OperationRepository;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class OperationDeleteHandler implements MessageHandlerInterface
+class StatisticOperationHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationService $operationService,
+        private OperationRepository $operationRepository,
         private SerializerInterface $serializer,
     ) {
     }
@@ -21,13 +21,13 @@ class OperationDeleteHandler implements MessageHandlerInterface
     /**
      * @throws Exception
      */
-    public function __invoke(OperationDeleteCommand $command): ResponseInterface
+    public function __invoke(StatisticOperationCommand $command): ResponseInterface
     {
-        $this->operationService->delete($command->getId());
+        $statistic = $this->operationRepository->getStatistic();
 
         return new HttpResponse(
             status: Response::HTTP_OK,
-            body: $this->serializer->serialize([], 'json')
+            body: $this->serializer->serialize($statistic, 'json')
         );
     }
 }
