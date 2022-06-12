@@ -2,7 +2,8 @@
 
 namespace App\Application\Command\Operation\Update;
 
-use App\Application\Service\OperationService;
+use App\Domain\Contract\Factory\OperationFactoryInterface;
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +14,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 class OperationUpdateHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationService $operationService,
+        private OperationFactoryInterface $operationFactory,
+        private OperationRepositoryInterface $operationRepository,
         private SerializerInterface $serializer,
     ) {
     }
@@ -23,7 +25,11 @@ class OperationUpdateHandler implements MessageHandlerInterface
      */
     public function __invoke(OperationUpdateCommand $command): ResponseInterface
     {
-        $this->operationService->updateByCommand($command);
+        $entity = $this->operationRepository->findByOne($command->getId());
+
+        $this->operationRepository->update(
+            $this->operationFactory->fillEntity($entity, $command),
+        );
 
         return new HttpResponse(
             status: Response::HTTP_OK,

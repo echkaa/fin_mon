@@ -4,14 +4,12 @@ namespace App\Application\Repository;
 
 use App\Domain\Contract\Repository\UserRepositoryInterface;
 use App\Domain\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
-class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
+class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    function getEntityClassName(): string
     {
-        parent::__construct($registry, User::class);
+        return User::class;
     }
 
     public function getByClientId(string $clientId): ?User

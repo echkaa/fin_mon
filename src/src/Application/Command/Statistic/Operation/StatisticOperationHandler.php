@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Statistic\Operation;
 
-use App\Application\Repository\OperationRepository;
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class StatisticOperationHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationRepository $operationRepository,
+        private OperationRepositoryInterface $operationRepository,
         private SerializerInterface $serializer,
     ) {
     }

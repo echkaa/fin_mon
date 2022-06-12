@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Operation\Delete;
 
-use App\Application\Service\OperationService;
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class OperationDeleteHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationService $operationService,
+        private OperationRepositoryInterface $operationRepository,
         private SerializerInterface $serializer,
     ) {
     }
@@ -23,7 +23,9 @@ class OperationDeleteHandler implements MessageHandlerInterface
      */
     public function __invoke(OperationDeleteCommand $command): ResponseInterface
     {
-        $this->operationService->delete($command->getId());
+        $entity = $this->operationRepository->findByOne($command->getId());
+
+        $this->operationRepository->delete($entity);
 
         return new HttpResponse(
             status: Response::HTTP_OK,

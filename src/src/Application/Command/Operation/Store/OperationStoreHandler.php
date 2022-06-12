@@ -2,7 +2,8 @@
 
 namespace App\Application\Command\Operation\Store;
 
-use App\Application\Service\OperationService;
+use App\Domain\Contract\Factory\OperationFactoryInterface;
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +14,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 class OperationStoreHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OperationService $operationService,
+        private OperationFactoryInterface $operationFactory,
+        private OperationRepositoryInterface $operationRepository,
         private SerializerInterface $serializer,
     ) {
     }
@@ -23,7 +25,11 @@ class OperationStoreHandler implements MessageHandlerInterface
      */
     public function __invoke(OperationStoreCommand $command): ResponseInterface
     {
-        $this->operationService->storeByCommand($command);
+        $entity = $this->operationFactory->getInstance();
+
+        $this->operationRepository->store(
+            $this->operationFactory->fillEntity($entity, $command),
+        );
 
         return new HttpResponse(
             status: Response::HTTP_CREATED,

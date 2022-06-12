@@ -2,15 +2,14 @@
 
 namespace App\Application\Repository;
 
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use App\Domain\Entity\Operation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
-class OperationRepository extends ServiceEntityRepository
+class OperationRepository extends AbstractRepository implements OperationRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function getEntityClassName(): string
     {
-        parent::__construct($registry, Operation::class);
+        return Operation::class;
     }
 
     public function getStatistic(): array

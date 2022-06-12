@@ -3,6 +3,7 @@
 namespace App\Application\Command\Operation\Update;
 
 use App\Application\Command\AbstractCommand;
+use App\Domain\Contract\Command\OperationFillCommandInterface;
 use App\Domain\Entity\Operation;
 use Symfony\Component\Validator\Constraints as Assert;
 use OpenApi\Annotations as OA;
@@ -19,7 +20,7 @@ use OpenApi\Annotations as OA;
  *     }
  * )
  */
-class OperationUpdateCommand extends AbstractCommand
+class OperationUpdateCommand extends AbstractCommand implements OperationFillCommandInterface
 {
     /**
      * @Assert\NotBlank(message="Amount should not be blank.")
