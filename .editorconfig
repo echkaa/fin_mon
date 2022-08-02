@@ -267,7 +267,7 @@ ij_php_while_brace_force = always
 ij_php_while_on_new_line = false
 
 [{*.yaml,*.yml}]
-indent_size = 4
+indent_size = 2
 ij_yaml_align_values_properties = do_not_align
 ij_yaml_autoinsert_sequence_marker = true
 ij_yaml_block_mapping_on_new_line = false
