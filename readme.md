@@ -3,7 +3,7 @@
 > For PHPUnit:\
 > ```cp -i phpunit.xml.dist phpunit.xml```
 
-> For Auth:\
+> For Auth (generate new keys):\
 > ```php bin/console lexik:jwt:generate-keypair```
 >
 > or
