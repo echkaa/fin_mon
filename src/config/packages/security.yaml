@@ -18,3 +18,11 @@ security:
     access_control:
         - { path: ^/v1/token, roles: PUBLIC_ACCESS }
         - { path: ^/v1, roles: IS_AUTHENTICATED_FULLY }
+
+    password_hashers:
+        App\Domain\Entity\User: 'auto'
+
+        # auto hasher with custom options for all PasswordAuthenticatedUserInterface instances
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+            algorithm: 'auto'
+            cost: 15

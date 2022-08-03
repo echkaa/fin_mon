@@ -6,5 +6,5 @@ use App\Domain\Entity\User;
 
 interface VerifyUserCredentialsInterface
 {
-    function verify(User $user, string $username, string $password): bool;
+    function verify(User $user, string $password): bool;
 }

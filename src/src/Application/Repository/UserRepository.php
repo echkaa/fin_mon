@@ -14,9 +14,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
     public function getByClientId(string $clientId): ?User
     {
-        return (new User())
-            ->setClientId($clientId)
-            ->setUsername('oleksii_kava')
-            ->setPassword('mypassword');
+        return $this->findOneBy(['client_id' => $clientId]);
     }
 }

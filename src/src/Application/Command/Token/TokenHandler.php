@@ -29,7 +29,6 @@ class TokenHandler implements MessageHandlerInterface
 
         $checkCredentials = $this->verifyUserCredentials->verify(
             user: $user,
-            username: $command->getUsername(),
             password: $command->getPassword()
         );
 

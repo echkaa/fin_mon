@@ -30,3 +30,4 @@ services:
 
     App\Domain\Contract\Verification\VerifyUserCredentialsInterface:
         class: 'App\Application\Security\Authorization\VerifyUserCredentials'
+

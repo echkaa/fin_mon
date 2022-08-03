@@ -11,12 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @OA\Schema(
  *     required={
  *         "client_id",
- *         "username",
  *         "password",
  *     },
  *     example={
  *         "client_id": "d1befa03c79ca0b84ecc488dea96bc68",
- *         "username": "oleksii_kava",
  *         "password": "mypassword",
  *         "scope": "one of available scopes",
  *     }
@@ -31,11 +29,6 @@ class TokenCommand extends AbstractCommand
      */
     protected ?string $clientId = null;
     /**
-     * @Assert\NotBlank(message="username should not be blank.")
-     * @OA\Property(property="username")
-     */
-    protected ?string $username = null;
-    /**
      * @Assert\NotBlank(message="password should not be blank.")
      * @OA\Property(property="password")
      */
@@ -48,11 +41,6 @@ class TokenCommand extends AbstractCommand
     public function getClientId(): ?string
     {
         return $this->clientId;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
     }
 
     public function getPassword(): ?string

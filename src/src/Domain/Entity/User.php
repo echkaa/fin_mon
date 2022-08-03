@@ -6,10 +6,12 @@ use App\Application\Repository\UserRepository;
 use App\Domain\Contract\Entity\EntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, EntityInterface
+#[ORM\HasLifecycleCallbacks]
+class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityInterface
 {
     const USER_ROLE = 'USER_ROLE';
     #[ORM\Id]
@@ -20,19 +22,34 @@ class User implements UserInterface, EntityInterface
     public $client_id;
     #[ORM\Column(type: 'string', unique: true)]
     private $username;
-
     #[ORM\Column(type: 'string')]
     private $password;
-
     #[ORM\Column(type: 'datetime')]
     private $created;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime')]
     private $updated;
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function updatedTimestamps(): void
+    {
+        $this->setUpdatedAt(new DateTime('now'));
+
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new DateTime('now'));
+        }
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): ?self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getUsername(): ?string
@@ -66,14 +83,23 @@ class User implements UserInterface, EntityInterface
         return $this;
     }
 
-    public function onPrePersist()
+    public function setCreatedAt(DateTime $dateTime): self
     {
-        $this->created = new DateTime("now");
+        $this->created = $dateTime;
+
+        return $this;
     }
 
-    public function onPreUpdate()
+    public function getCreatedAt(): ?DateTime
     {
-        $this->updated = new DateTime("now");
+        return $this->created;
+    }
+
+    public function setUpdatedAt(DateTime $dateTime): self
+    {
+        $this->updated = $dateTime;
+
+        return $this;
     }
 
     public function getRoles(): array
