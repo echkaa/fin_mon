@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "evotodi/seed-bundle": "^6.0",
+        "guzzlehttp/guzzle": "^7.4",
         "guzzlehttp/psr7": "^2.2",
         "nelmio/api-doc-bundle": "^4.9",
         "nyholm/psr7": "^1.5",
