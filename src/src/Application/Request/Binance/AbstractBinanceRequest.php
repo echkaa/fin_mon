@@ -5,26 +5,25 @@ namespace App\Application\Request\Binance;
 use App\Application\Client\BinanceClient;
 use App\Application\Factory\TokenBinanceFactory;
 use App\Domain\Entity\BinanceToken;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractBinanceRequest
 {
     public function __construct(
+        private RequestStack $requestStack,
         protected BinanceClient $binanceClient,
         private TokenBinanceFactory $tokenBinanceFactory,
     ) {
     }
 
-    protected function getRequestToken(string $publicKey, string $privateKey): BinanceToken
+    protected function getRequestToken(array $params = []): BinanceToken
     {
-        return $this->tokenBinanceFactory->create(
-            publicKey: $publicKey,
-            privateKey: $privateKey,
-            params: $this->getData(),
-        );
-    }
+        $request = $this->requestStack->getCurrentRequest();
 
-    private function getData(): array
-    {
-        return [];
+        return $this->tokenBinanceFactory->create(
+            publicKey: $request->query->get('public_key', ''),
+            privateKey: $request->query->get('private_key', ''),
+            params: $params,
+        );
     }
 }

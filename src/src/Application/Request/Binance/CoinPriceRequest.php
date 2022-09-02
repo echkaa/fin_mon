@@ -4,16 +4,14 @@ namespace App\Application\Request\Binance;
 
 use GuzzleHttp\Exception\GuzzleException;
 
-class AccountBinanceRequest extends AbstractBinanceRequest
+class CoinPriceRequest extends AbstractBinanceRequest
 {
     /**
      * @throws GuzzleException
      */
-    public function sendRequest(): array
+    public function sendRequest(string $coinName): array
     {
-        $response = $this->binanceClient->getAccountData(
-            $this->getRequestToken(),
-        );
+        $response = $this->binanceClient->getCoinPrice($coinName);
 
         return json_decode($response->getBody()->getContents(), true);
     }

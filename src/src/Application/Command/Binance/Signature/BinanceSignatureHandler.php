@@ -34,7 +34,10 @@ class BinanceSignatureHandler implements MessageHandlerInterface
         return new HttpResponse(
             status: Response::HTTP_OK,
             body: $this->serializer->serialize(
-                data: ['signature' => $token->getSignature()],
+                data: [
+                    'signature' => $token->getSignature(),
+                    'params' => $token->getParamsHttpWithToken(),
+                ],
                 format: 'json',
             )
         );
