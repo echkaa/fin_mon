@@ -50,24 +50,30 @@ services:
 
   # PHPMyAdmin
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5
-    ports:
-      - 8888:80
-    environment:
-      PMA_HOST: mysql
-    depends_on:
-      mysql:
-        condition: service_healthy
+      image: phpmyadmin/phpmyadmin:5
+      ports:
+          - 8888:80
+      environment:
+          PMA_HOST: mysql
+      depends_on:
+          mysql:
+              condition: service_healthy
+
+  front:
+      build: ./docker/front
+      working_dir: /var/www/kava_project_front
+      volumes:
+          - ./front:/var/www/kava_project_front
 
   init:
-    build:
-      context: docker/init
-    volumes:
-      - ./src:/var/www/kava_project
-      - ./docker/init/init.sh:/init.sh
-    command: bash -c "cat /init.sh | bash"
-    depends_on:
-      - php
+      build:
+          context: docker/init
+      volumes:
+          - ./src:/var/www/kava_project
+          - ./docker/init/init.sh:/init.sh
+      command: bash -c "cat /init.sh | bash"
+      depends_on:
+          - php
 # Volumes
 volumes:
   mysqldata:
