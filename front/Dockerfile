@@ -1,8 +1,10 @@
-FROM node:12
+FROM node:16
 
 WORKDIR /var/www/kava_project_front
 
-COPY . ./
+RUN npm install npm@latest -g
+
+COPY . .
 
 RUN npm install
 
