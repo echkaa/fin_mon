@@ -1,14 +1,16 @@
-function AppSitebar() {
+import {Link} from "react-router-dom";
+
+export default function AppSitebar() {
     return (
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                <a href="#" className="brand-link">
-                    <span className="brand-text font-weight-light">FinMon</span>
-                </a>
+                <Link className="brand-link" to="/">
+                    <span className="brand-text font-weight-light">Dashboard</span>
+                </Link>
 
                 <div className="sidebar">
                     <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div className="info">
-                            <a href="#" className="d-block">Alexander Pierce</a>
+                            <a href="#" className="d-block">TODO::username</a>
                         </div>
                     </div>
 
@@ -17,16 +19,16 @@ function AppSitebar() {
                             <li className="nav-item menu-open">
                                 <ul className="nav nav-treeview">
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link active">
+                                        <Link className="nav-link active" to="/">
                                             <i className="far fa-circle nav-icon"></i>
-                                            <p>Active Page</p>
-                                        </a>
+                                            <p>Dashboard</p>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link">
+                                        <Link className="nav-link" to="/test">
                                             <i className="far fa-circle nav-icon"></i>
-                                            <p>Inactive Page</p>
-                                        </a>
+                                            <p>Test</p>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
@@ -36,5 +38,3 @@ function AppSitebar() {
             </aside>
     );
 }
-
-export default AppSitebar;

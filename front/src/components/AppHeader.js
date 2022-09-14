@@ -1,4 +1,6 @@
-function AppHeader() {
+import AuthLogoutLink from "./Auth/AuthLogoutLink";
+
+export default function AppHeader() {
     return (
             <header>
                 <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -11,9 +13,13 @@ function AppHeader() {
                             <a href="#" className="nav-link">Home</a>
                         </li>
                     </ul>
+
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item d-none d-sm-inline-block">
+                            <AuthLogoutLink/>
+                        </li>
+                    </ul>
                 </nav>
             </header>
     );
 }
-
-export default AppHeader;
