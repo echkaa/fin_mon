@@ -12,8 +12,7 @@ module.exports = {
         static: path.resolve(__dirname, "public"),
         open: true,
         hot: true,
-        liveReload: true,
-        allowedHosts: "all"
+        liveReload: true
     },
     module: {
         rules: [
