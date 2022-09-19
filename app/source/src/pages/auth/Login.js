@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 async function loginUser(credentials) {
     return fetch('/api/v1/token', {

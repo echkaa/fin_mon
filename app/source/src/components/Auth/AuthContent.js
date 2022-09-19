@@ -3,7 +3,7 @@ import {
     Route,
 } from "react-router-dom";
 
-import LoginPage from "../../pages/auth/Login";
+import LoginPage from "../../pages/auth/Login.js";
 
 export default function AppContent() {
     return (
@@ -11,7 +11,7 @@ export default function AppContent() {
                 <div className="login-box">
                     <div className="card">
                         <Routes>
-                            <Route path="" element={<LoginPage/>}/>
+                            <Route path="*" element={<LoginPage/>}/>
                         </Routes>
                     </div>
                 </div>

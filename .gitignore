@@ -1,5 +1,1 @@
 .idea
-src/vendor
-src/public/bundles
-src/var/cache
-src/var/log

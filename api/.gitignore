@@ -1,0 +1,4 @@
+vendor
+public/bundles
+var/cache
+var/log

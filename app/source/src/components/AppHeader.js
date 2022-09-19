@@ -1,4 +1,4 @@
-import AuthLogoutLink from "./Auth/AuthLogoutLink";
+import AuthLogoutLink from "./Auth/AuthLogoutLink.js";
 
 export default function AppHeader() {
     return (
