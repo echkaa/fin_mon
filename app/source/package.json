@@ -4,7 +4,7 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "start": "webpack-dev-server --allowed-hosts all .",
+        "start": "webpack-dev-server --disable-host-check .",
         "build": "webpack ."
     },
     "author": "",
