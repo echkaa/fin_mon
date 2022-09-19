@@ -13,7 +13,7 @@ module.exports = {
         open: true,
         hot: true,
         liveReload: true,
-        disableHostCheck: true
+        allowedHosts: "all"
     },
     module: {
         rules: [
