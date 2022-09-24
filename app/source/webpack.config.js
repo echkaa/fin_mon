@@ -16,6 +16,9 @@ module.exports = {
         allowedHosts: [
             'finkava.com',
         ],
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
     module: {
         rules: [

@@ -1,15 +1,6 @@
 import {useState} from 'react';
 
-async function loginUser(credentials) {
-    return fetch('/api/v1/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-            .then(data => data.json())
-}
+import {loginUser} from "../../functions/AuthFunction";
 
 export default function LoginPage() {
     const [clientId, setClientId] = useState();
@@ -17,14 +8,11 @@ export default function LoginPage() {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const response = await loginUser({
+
+        await loginUser({
             clientId,
             password
         });
-
-        localStorage.setItem('token', response.result.token);
-
-        window.location.reload();
     }
 
     return (

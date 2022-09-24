@@ -65,6 +65,8 @@ services:
         container_name: app
         build:
             context: ./app
+        volumes:
+            - ./app/source/src:/var/www/kava_project_front/src
         ports:
             - "3000:3000"
 

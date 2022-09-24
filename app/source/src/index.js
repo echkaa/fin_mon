@@ -6,12 +6,11 @@ import './css/index.css';
 
 import '../node_modules/admin-lte/dist/js/adminlte.js'
 
-import App from './App.js';
-
+import RouteList from "./RouteList";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <BrowserRouter>
-            <App/>
+            <RouteList/>
         </BrowserRouter>
 );

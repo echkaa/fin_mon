@@ -1,4 +1,5 @@
 import AuthLogoutLink from "./Auth/AuthLogoutLink.js";
+import {Link} from "react-router-dom";
 
 export default function AppHeader() {
     return (
@@ -9,9 +10,10 @@ export default function AppHeader() {
                             <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i
                                     className="fas fa-bars"></i></a>
                         </li>
-                        <li className="nav-item d-none d-sm-inline-block">
-                            <a href="#" className="nav-link">Home</a>
-                        </li>
+
+                        <Link className="nav-item d-none d-sm-inline-block" to="/">
+                            <span className="nav-link">Dashboard</span>
+                        </Link>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">

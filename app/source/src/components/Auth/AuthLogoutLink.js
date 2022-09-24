@@ -1,13 +1,13 @@
+import {logout} from "../../functions/AuthFunction";
+
 export default function AuthLogoutLink() {
-    const logout = async e => {
+    const handleLogout = async e => {
         e.preventDefault();
 
-        localStorage.removeItem('token');
-
-        window.location.reload();
+        logout()
     }
 
     return (
-            <a href="#" onClick={logout} className="nav-link">Logout</a>
+            <a href="#" onClick={handleLogout} className="nav-link">Logout</a>
     );
 }
