@@ -12,8 +12,8 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         return User::class;
     }
 
-    public function getByClientId(string $clientId): ?User
+    public function getByUsername(string $username): ?User
     {
-        return $this->findOneBy(['client_id' => $clientId]);
+        return $this->findOneBy(['username' => $username]);
     }
 }

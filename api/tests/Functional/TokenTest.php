@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TokenTest extends WebTestCase
 {
-    private string $uri = '/v1/token';
+    private string $uri = '/v1/auth/token';
 
     public function testErrorRequest(): void
     {
@@ -27,7 +27,6 @@ class TokenTest extends WebTestCase
             method: 'POST',
             uri: $this->uri,
             parameters: [
-                'client_id' => 'd1befa03c79ca0b84ecc488dea96bc68',
                 'password' => 'mypassword',
                 'username' => 'oleksii_kava',
                 'scope' => 'https://fin_mon.ua/',

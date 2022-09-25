@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Command\Token;
+namespace App\Application\Command\Auth\Token;
 
 use App\Application\Command\AbstractCommand;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -10,11 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @OA\Schema(
  *     required={
- *         "client_id",
+ *         "username",
  *         "password",
  *     },
  *     example={
- *         "client_id": "d1befa03c79ca0b84ecc488dea96bc68",
+ *         "username": "oleksii_kava",
  *         "password": "mypassword",
  *         "scope": "one of available scopes",
  *     }
@@ -23,14 +23,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class TokenCommand extends AbstractCommand
 {
     /**
-     * @Assert\NotBlank(message="client_id should not be blank.")
-     * @SerializedName("client_id")
-     * @OA\Property(property="client_id")
+     * @Assert\NotBlank(message="Username should not be blank.")
+     * @SerializedName("username")
+     * @OA\Property(property="username")
      */
-    protected ?string $clientId = null;
+    protected ?string $username = null;
     /**
-     * @Assert\NotBlank(message="password should not be blank.")
-     * @OA\Property(property="password")
+     * @Assert\NotBlank(message="Username should not be blank.")
+     * @OA\Property(property="username")
      */
     protected ?string $password = null;
     /**
@@ -38,9 +38,9 @@ class TokenCommand extends AbstractCommand
      */
     protected string|array|null $scope = [];
 
-    public function getClientId(): ?string
+    public function getUsername(): ?string
     {
-        return $this->clientId;
+        return $this->username;
     }
 
     public function getPassword(): ?string

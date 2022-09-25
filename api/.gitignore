@@ -1,3 +1,4 @@
+config/jwt
 vendor
 public/bundles
 var/cache

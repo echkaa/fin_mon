@@ -40,7 +40,6 @@ class UserSeed extends Seed
 
         $user = (new User())
             ->setId(self::USER_ID)
-            ->setClientId('d1befa03c79ca0b84ecc488dea96bc68')
             ->setUsername('oleksii_kava');
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'mypassword');

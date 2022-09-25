@@ -9,7 +9,8 @@ usermod --non-unique --uid 1000 www-data
 groupmod --non-unique --gid 1000 www-data
 chown -R www-data:www-data .
 
-php bin/console doctrine:migrations:migrate
+echo | php bin/console doctrine:migrations:diff
+echo | php bin/console doctrine:migrations:migrate
 php bin/console seed:load user
 
 mkdir config/jwt

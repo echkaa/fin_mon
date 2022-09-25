@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Presentation\Controller;
+namespace App\Presentation\Controller\Auth;
 
-use App\Application\Command\Token\TokenCommand;
+use App\Application\Command\Auth\Token\TokenCommand;
+use App\Presentation\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 class TokenController extends AbstractController
 {
     /**
-     * @Route("/v1/token", name="get_token", methods={"POST"})
+     * @Route("/v1/auth/token", name="get_token", methods={"POST"})
      * @OA\Get(summary="Get Token")
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(
@@ -22,7 +23,7 @@ class TokenController extends AbstractController
      * )
      * @throws ExceptionInterface
      */
-    public function getTokenUser()
+    public function token()
     {
         return $this->response($this->handle(TokenCommand::class));
     }

@@ -6,5 +6,5 @@ use App\Domain\Entity\User;
 
 interface UserRepositoryInterface extends AbstractRepositoryInterface
 {
-    function getByClientId(string $clientId): ?User;
+    function getByUsername(string $username): ?User;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Command\Token;
+namespace App\Application\Command\Auth\Token;
 
 use App\Domain\Contract\Repository\UserRepositoryInterface;
 use App\Domain\Contract\Verification\VerifyUserCredentialsInterface;
@@ -21,7 +21,7 @@ class TokenHandler implements MessageHandlerInterface
 
     public function __invoke(TokenCommand $command): ResponseInterface
     {
-        $user = $this->userRepository->getByClientId($command->getClientId());
+        $user = $this->userRepository->getByUsername($command->getUsername());
 
         if ($user === null) {
             throw new AuthException('No found user');

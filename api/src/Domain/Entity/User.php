@@ -19,11 +19,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
     #[ORM\Column(type: 'integer')]
     private $id;
     #[ORM\Column(type: 'string', unique: true)]
-    public $client_id;
-    #[ORM\Column(type: 'string', unique: true)]
     private $username;
     #[ORM\Column(type: 'string')]
     private $password;
+    #[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'user')]
+    private $profile;
     #[ORM\Column(type: 'datetime')]
     private $created;
     #[ORM\Column(type: 'datetime')]
@@ -76,13 +76,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
         return $this;
     }
 
-    public function setClientId(string $clientId): self
-    {
-        $this->client_id = $clientId;
-
-        return $this;
-    }
-
     public function setCreatedAt(DateTime $dateTime): self
     {
         $this->created = $dateTime;
@@ -116,6 +109,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
 
     public function getUserIdentifier(): string
     {
-        return $this->client_id;
+        return $this->username;
     }
 }
