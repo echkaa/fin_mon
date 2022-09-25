@@ -1,4 +1,4 @@
-import AuthLogoutLink from "../components/Auth/AuthLogoutLink";
+import {logout} from "./AuthFunction";
 
 export async function requestWithAuthCheck(url, method, body = null, headers = null) {
     return fetch(url, {
@@ -8,7 +8,7 @@ export async function requestWithAuthCheck(url, method, body = null, headers = n
     })
     .then(function (response) {
         if (response.status === 401) {
-            AuthLogoutLink();
+            logout();
         }
 
         return response.json();
