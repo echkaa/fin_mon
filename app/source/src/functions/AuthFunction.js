@@ -31,5 +31,5 @@ export async function registrationUser(credentials) {
 
     localStorage.setItem('token', response.result.token);
 
-    //window.location.reload();
+    window.location.reload();
 }
