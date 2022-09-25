@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Repository;
+namespace App\Infrastructure\Persistence\MySQL\Repository;
 
 use App\Domain\Contract\Entity\EntityInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

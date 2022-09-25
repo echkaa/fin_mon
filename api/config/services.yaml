@@ -32,7 +32,7 @@ services:
     GuzzleHttp\ClientInterface:
         class: GuzzleHttp\Client
 
-    App\Application\Client\BinanceClient:
+    App\Infrastructure\Client\BinanceClient:
         arguments:
             $binanceAPIUrl: '%binance.api_url%'
 

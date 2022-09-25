@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Repository;
+namespace App\Infrastructure\Persistence\MySQL\Repository;
 
 use App\Domain\Contract\Repository\UserRepositoryInterface;
 use App\Domain\Entity\User;

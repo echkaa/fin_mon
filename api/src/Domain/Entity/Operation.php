@@ -2,12 +2,12 @@
 
 namespace App\Domain\Entity;
 
-use App\Application\Repository\OperationRepository;
+use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use App\Domain\Contract\Entity\EntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OperationRepository::class)]
+#[ORM\Entity(repositoryClass: OperationRepositoryInterface::class)]
 #[ORM\HasLifecycleCallbacks]
 class Operation implements EntityInterface
 {

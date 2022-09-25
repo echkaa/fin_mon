@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Client;
+namespace App\Infrastructure\Client;
 
 use App\Domain\Entity\BinanceToken;
 use GuzzleHttp\ClientInterface;

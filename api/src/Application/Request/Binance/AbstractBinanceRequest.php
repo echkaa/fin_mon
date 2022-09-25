@@ -2,7 +2,7 @@
 
 namespace App\Application\Request\Binance;
 
-use App\Application\Client\BinanceClient;
+use App\Infrastructure\Client\BinanceClient;
 use App\Application\Factory\TokenBinanceFactory;
 use App\Domain\Entity\BinanceToken;
 use Symfony\Component\HttpFoundation\RequestStack;

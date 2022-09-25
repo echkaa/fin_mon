@@ -2,14 +2,14 @@
 
 namespace App\Domain\Entity;
 
-use App\Application\Repository\UserRepository;
+use App\Domain\Contract\Repository\UserRepositoryInterface;
 use App\Domain\Contract\Entity\EntityInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepositoryInterface::class)]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityInterface
 {

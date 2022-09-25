@@ -2,7 +2,7 @@
 
 namespace App\Application\DataSeeds;
 
-use App\Application\Repository\UserRepository;
+use App\Domain\Contract\Repository\UserRepositoryInterface;
 use App\Domain\Entity\User;
 use Evotodi\SeedBundle\Command\Seed;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,7 +14,7 @@ class UserSeed extends Seed
     private const USER_ID = 1;
 
     public function __construct(
-        private UserRepository $userRepository,
+        private UserRepositoryInterface $userRepository,
         private UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();

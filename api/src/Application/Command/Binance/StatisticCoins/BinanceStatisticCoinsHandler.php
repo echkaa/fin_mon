@@ -28,23 +28,19 @@ class BinanceStatisticCoinsHandler implements MessageHandlerInterface
      */
     public function __invoke(BinanceStatisticCoinsCommand $command): ResponseInterface
     {
-        try {
-            $accountData = $this->accountBinanceRequest->sendRequest();
+        $accountData = $this->accountBinanceRequest->sendRequest();
 
-            $account = $this->binanceAccountFactory->create($accountData);
+        $account = $this->binanceAccountFactory->create($accountData);
 
-            $account->setBalanceCoins(
-                $this->binanceCoinService->filterCoinsByList(
-                    coins: $account->getBalanceCoins(),
-                    coinNeedList: $command->getCoins(),
-                )
-            );
+        $account->setBalanceCoins(
+            $this->binanceCoinService->filterCoinsByList(
+                coins: $account->getBalanceCoins(),
+                coinNeedList: $command->getCoins(),
+            )
+        );
 
-            $this->binanceCoinService->fillMarketPrice($account->getBalanceCoins());
-            $this->binanceCoinService->fillRealPrice($account->getBalanceCoins());
-        } catch (Throwable $exception) {
-            dd($exception);
-        }
+        $this->binanceCoinService->fillMarketPrice($account->getBalanceCoins());
+        $this->binanceCoinService->fillRealPrice($account->getBalanceCoins());
 
         return new HttpResponse(
             status: Response::HTTP_OK,
