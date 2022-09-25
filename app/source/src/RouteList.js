@@ -7,6 +7,7 @@ import TestPage from "./pages/Test";
 import DashboardPage from "./pages/Dashboard";
 
 import LoginPage from "./pages/auth/Login";
+import RegistrationPage from "./pages/auth/Registration";
 
 import AppPage from "./components/AppPage";
 import AuthPage from "./components/Auth/AuthPage";
@@ -21,6 +22,8 @@ export default function RouteList() {
                 <Route path="test" element={<RouteAdminGuard page={<AppPage content={<TestPage/>}/>}/>}/>
 
                 <Route path="login" element={<RouteAuthGuard page={<AuthPage content={<LoginPage/>}/>}/>}/>
+                <Route path="registration"
+                       element={<RouteAuthGuard page={<AuthPage content={<RegistrationPage/>}/>}/>}/>
             </Routes>
     );
 }

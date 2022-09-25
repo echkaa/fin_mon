@@ -1,16 +1,16 @@
 import {useState} from 'react';
 import {Link} from "react-router-dom";
 
-import {loginUser} from "../../functions/AuthFunction";
+import {registrationUser} from "../../functions/AuthFunction";
 
-export default function LoginPage() {
+export default function RegistrationPage() {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();
 
-        await loginUser({
+        await registrationUser({
             username,
             password,
         });
@@ -18,7 +18,7 @@ export default function LoginPage() {
 
     return (
             <div className="card-body login-card-body">
-                <p className="login-box-msg">Please Log In</p>
+                <p className="login-box-msg">Please Reg In</p>
 
                 <form className="card-body login-card-body" onSubmit={handleSubmit}>
                     <div className="input-group mb-3">
@@ -50,8 +50,8 @@ export default function LoginPage() {
                     </div>
                 </form>
 
-                <Link className="nav-link" to="/registration">
-                    <span>Reg In</span>
+                <Link className="nav-link" to="/login">
+                    <span>Log In</span>
                 </Link>
             </div>
     );
