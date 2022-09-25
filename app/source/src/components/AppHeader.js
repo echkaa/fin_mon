@@ -17,7 +17,7 @@ export default function AppHeader() {
                     </ul>
 
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item d-none d-sm-inline-block">
+                        <li className="nav-item d-sm-inline-block">
                             <AuthLogoutLink/>
                         </li>
                     </ul>

@@ -1,3 +1,5 @@
+import {executeWithCheckOnError} from "./RequestFunctions";
+
 export function logout() {
     localStorage.removeItem('token');
 
@@ -14,9 +16,14 @@ export async function loginUser(credentials) {
     })
     .then(data => data.json());
 
-    localStorage.setItem('token', response.result.token);
+    executeWithCheckOnError(
+            response,
+            function (response) {
+                localStorage.setItem('token', response.result.token);
 
-    window.location.reload();
+                window.location.reload();
+            }
+    )
 }
 
 export async function registrationUser(credentials) {
@@ -29,7 +36,12 @@ export async function registrationUser(credentials) {
     })
     .then(data => data.json());
 
-    localStorage.setItem('token', response.result.token);
+    executeWithCheckOnError(
+            response,
+            function (response) {
+                localStorage.setItem('token', response.result.token);
 
-    window.location.reload();
+                window.location.reload();
+            }
+    )
 }

@@ -1,4 +1,4 @@
-import {logout} from "../../functions/AuthFunction";
+import {logout} from "../../functions/AuthFunctions";
 
 export default function AuthLogoutLink() {
     const handleLogout = async e => {

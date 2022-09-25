@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
+import {ToastContainer} from 'react-toastify';
 
 import '../node_modules/admin-lte/dist/css/adminlte.css';
 import './css/index.css';
@@ -12,5 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <BrowserRouter>
             <RouteList/>
+
+            <ToastContainer/>
         </BrowserRouter>
 );

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Link} from "react-router-dom";
 
-import {registrationUser} from "../../functions/AuthFunction";
+import {registrationUser} from "../../functions/AuthFunctions";
 
 export default function RegistrationPage() {
     const [username, setUsername] = useState();
