@@ -24,6 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
     private $password;
     #[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'user')]
     private $profile;
+    #[ORM\OneToMany(targetEntity: Operation::class, mappedBy: 'user')]
+    private $operations;
     #[ORM\Column(type: 'datetime')]
     private $created;
     #[ORM\Column(type: 'datetime')]

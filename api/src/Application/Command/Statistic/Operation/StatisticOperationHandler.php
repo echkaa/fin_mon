@@ -2,6 +2,7 @@
 
 namespace App\Application\Command\Statistic\Operation;
 
+use App\Application\Service\UserService;
 use App\Domain\Contract\Repository\OperationRepositoryInterface;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
@@ -15,6 +16,7 @@ class StatisticOperationHandler implements MessageHandlerInterface
     public function __construct(
         private OperationRepositoryInterface $operationRepository,
         private SerializerInterface $serializer,
+        private UserService $userService,
     ) {
     }
 
@@ -23,7 +25,9 @@ class StatisticOperationHandler implements MessageHandlerInterface
      */
     public function __invoke(StatisticOperationCommand $command): ResponseInterface
     {
-        $statistic = $this->operationRepository->getStatistic();
+        $statistic = $this->operationRepository->getStatisticByUser(
+            $this->userService->getCurrentUser()->getId()
+        );
 
         return new HttpResponse(
             status: Response::HTTP_OK,

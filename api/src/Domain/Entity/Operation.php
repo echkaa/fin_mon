@@ -26,6 +26,9 @@ class Operation implements EntityInterface
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'operation')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    private $user;
     #[ORM\Column(type: 'float')]
     private $amount;
     #[ORM\Column(type: 'integer', nullable: true)]

@@ -4,5 +4,5 @@ namespace App\Domain\Contract\Repository;
 
 interface OperationRepositoryInterface extends AbstractRepositoryInterface
 {
-    public function getStatistic(): array;
+    public function getStatisticByUser(int $userId): array;
 }

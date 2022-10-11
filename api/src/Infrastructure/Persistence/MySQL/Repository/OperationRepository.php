@@ -12,13 +12,15 @@ class OperationRepository extends AbstractRepository implements OperationReposit
         return Operation::class;
     }
 
-    public function getStatistic(): array
+    public function getStatisticByUser(int $userId): array
     {
         return $this->createQueryBuilder('op')
             ->select([
                 'SUM(op.amount) as summa',
                 'COUNT(op.id) as count_operation',
             ])
+            ->where('op.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getArrayResult();
     }
