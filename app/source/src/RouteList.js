@@ -9,8 +9,8 @@ import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/auth/Login";
 import RegistrationPage from "./pages/auth/Registration";
 
-import AppPage from "./components/AppPage";
-import AuthPage from "./components/Auth/AuthPage";
+import AppPage from "./components/page/AppPage";
+import AuthPage from "./components/authPage/AuthPage";
 
 import RouteAdminGuard from "./components/security/RouteAdminGuard";
 import RouteAuthGuard from "./components/security/RouteAuthGuard";

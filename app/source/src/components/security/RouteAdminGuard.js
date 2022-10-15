@@ -1,9 +1,11 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
+import UserContext from "../../entity/UserContext";
 
 const RouteAdminGuard = ({page}) => {
+    const {state} = React.useContext(UserContext);
 
-    if (localStorage.getItem("token") === null) {
+    if (state.token === null) {
         return <Navigate to="/login" replace/>;
     }
 

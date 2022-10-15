@@ -1,4 +1,4 @@
-import AuthLogoutLink from "./Auth/AuthLogoutLink.js";
+import AuthLogoutLink from "../authPage/AuthLogoutLink.js";
 import {Link} from "react-router-dom";
 
 export default function AppHeader() {

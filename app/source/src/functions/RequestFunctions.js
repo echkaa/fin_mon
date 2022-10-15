@@ -8,7 +8,7 @@ export function executeWithCheckOnError(response, callback) {
 }
 
 export async function requestWithAuthCheck(url, method, body = null, headers = null) {
-    return fetch(url, {
+    let response = await fetch(url, {
         method: method,
         headers: headers,
         body: body
@@ -18,10 +18,12 @@ export async function requestWithAuthCheck(url, method, body = null, headers = n
             logout();
         }
 
-        return executeWithCheckOnError(
-                response,
-                function (response) {
-                    return response;
-                });
-    })
+        return response.json();
+    });
+
+    return executeWithCheckOnError(
+            response,
+            function (response) {
+                return response;
+            });
 }
