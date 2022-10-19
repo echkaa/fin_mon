@@ -13,10 +13,12 @@ use OpenApi\Annotations as OA;
  *     required={
  *         "id",
  *         "amount",
+ *         "date",
  *     },
  *     example={
  *         "id": 1,
  *         "amount": 1250.56,
+ *         "date": "2000-01-01 10:10:10"
  *     }
  * )
  */
@@ -37,6 +39,10 @@ class OperationUpdateCommand extends AbstractCommand implements OperationFillCom
      * @Assert\Choice(choices=Operation::OPERATION_TYPES, message="Choose a valid type.")
      */
     protected ?string $type = null;
+    /**
+     * @Assert\DateTime()
+     */
+    protected string $date;
 
     public function getId(): int
     {
@@ -66,5 +72,10 @@ class OperationUpdateCommand extends AbstractCommand implements OperationFillCom
     public function getExternalCode(): string
     {
         return $this->external_code ?? Operation::EXTERNAL_CODE_API;
+    }
+
+    public function getDate(): string
+    {
+        return $this->date;
     }
 }

@@ -12,9 +12,11 @@ use OpenApi\Annotations as OA;
  * @OA\Schema(
  *     required={
  *         "amount",
+ *         "date",
  *     },
  *     example={
  *         "amount": 1250.56,
+ *         "date": "2000-01-01 10:10:10"
  *     }
  * )
  */
@@ -31,6 +33,10 @@ class OperationStoreCommand extends AbstractCommand implements OperationFillComm
     protected ?string $source = null;
     protected ?string $description = null;
     protected ?string $external_code = null;
+    /**
+     * @Assert\DateTime()
+     */
+    protected string $date;
 
     public function getAmount(): float
     {
@@ -55,5 +61,10 @@ class OperationStoreCommand extends AbstractCommand implements OperationFillComm
     public function getExternalCode(): string
     {
         return $this->external_code ?? Operation::EXTERNAL_CODE_API;
+    }
+
+    public function getDate(): string
+    {
+        return $this->date;
     }
 }

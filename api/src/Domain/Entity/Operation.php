@@ -27,7 +27,7 @@ class Operation implements EntityInterface
     #[ORM\Column(type: 'integer')]
     private $id;
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'operation')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     private $user;
     #[ORM\Column(type: 'float')]
     private $amount;
@@ -39,6 +39,8 @@ class Operation implements EntityInterface
     private $description;
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $external_code;
+    #[ORM\Column(type: 'datetime')]
+    private $date;
     #[ORM\Column(type: 'datetime')]
     private $created;
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -117,6 +119,25 @@ class Operation implements EntityInterface
     public function setExternalCode(?string $externalCode): self
     {
         $this->external_code = $externalCode;
+
+        return $this;
+    }
+
+    public function setDate(DateTime $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDate(): DateTime
+    {
+        return $this->date;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

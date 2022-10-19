@@ -14,6 +14,6 @@ class Profile
     #[ORM\Column(type: 'integer')]
     private $id;
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'profile')]
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     private $user;
 }

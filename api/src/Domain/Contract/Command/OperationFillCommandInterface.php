@@ -13,4 +13,6 @@ interface OperationFillCommandInterface
     public function getDescription(): ?string;
 
     public function getExternalCode(): string;
+
+    public function getDate(): string;
 }
