@@ -8,6 +8,6 @@ export default function AuthLogoutLink() {
     }
 
     return (
-            <a href="#" onClick={handleLogout} className="nav-link">Logout</a>
+        <a href="#" onClick={handleLogout} className="nav-link">Logout</a>
     );
 }

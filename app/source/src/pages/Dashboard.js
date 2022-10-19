@@ -8,9 +8,9 @@ export default class DashboardPage extends React.Component {
 
     render() {
         return (
-                <div>
-                    <OperationBlock/>
-                </div>
+            <div>
+                <OperationBlock/>
+            </div>
         );
     }
 }

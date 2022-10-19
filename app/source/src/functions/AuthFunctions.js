@@ -13,16 +13,15 @@ export async function loginUser(credentials) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials)
-    })
-    .then(data => data.json());
+    }).then(data => data.json());
 
     executeWithCheckOnError(
-            response,
-            function (response) {
-                localStorage.setItem('token', response.result.token);
+        response,
+        function (response) {
+            localStorage.setItem('token', response.result.token);
 
-                window.location.reload();
-            }
+            window.location.reload();
+        }
     )
 }
 
@@ -33,15 +32,14 @@ export async function registrationUser(credentials) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials)
-    })
-    .then(data => data.json());
+    }).then(data => data.json());
 
     executeWithCheckOnError(
-            response,
-            function (response) {
-                localStorage.setItem('token', response.result.token);
+        response,
+        function (response) {
+            localStorage.setItem('token', response.result.token);
 
-                window.location.reload();
-            }
+            window.location.reload();
+        }
     )
 }

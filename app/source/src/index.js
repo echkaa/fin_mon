@@ -15,11 +15,11 @@ import User from "./entity/User";
 const user = new User();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-        <BrowserRouter>
-            <UserProvider value={user}>
-                <RouteList/>
+    <BrowserRouter>
+        <UserProvider value={user}>
+            <RouteList/>
 
-                <ToastContainer/>
-            </UserProvider>
-        </BrowserRouter>
+            <ToastContainer/>
+        </UserProvider>
+    </BrowserRouter>
 );

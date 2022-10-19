@@ -17,13 +17,13 @@ import RouteAuthGuard from "./components/security/RouteAuthGuard";
 
 export default function RouteList() {
     return (
-            <Routes>
-                <Route path="*" element={<RouteAdminGuard page={<AppPage content={<DashboardPage/>}/>}/>}/>
-                <Route path="test" element={<RouteAdminGuard page={<AppPage content={<TestPage/>}/>}/>}/>
+        <Routes>
+            <Route path="*" element={<RouteAdminGuard page={<AppPage content={<DashboardPage/>}/>}/>}/>
+            <Route path="test" element={<RouteAdminGuard page={<AppPage content={<TestPage/>}/>}/>}/>
 
-                <Route path="login" element={<RouteAuthGuard page={<AuthPage content={<LoginPage/>}/>}/>}/>
-                <Route path="registration"
-                       element={<RouteAuthGuard page={<AuthPage content={<RegistrationPage/>}/>}/>}/>
-            </Routes>
+            <Route path="login" element={<RouteAuthGuard page={<AuthPage content={<LoginPage/>}/>}/>}/>
+            <Route path="registration"
+                   element={<RouteAuthGuard page={<AuthPage content={<RegistrationPage/>}/>}/>}/>
+        </Routes>
     );
 }
