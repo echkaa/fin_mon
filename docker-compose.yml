@@ -14,11 +14,11 @@ services:
             - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./docker/nginx/server.conf:/etc/nginx/conf.d/default.conf
         depends_on:
-            - php
+            - api
             - app
 
     # PHP Service
-    php:
+    api:
         build: ./docker/php
         working_dir: /var/www/kava_project
         extra_hosts:
@@ -78,7 +78,7 @@ services:
             - ./docker/init/init.sh:/init.sh
         command: bash -c "cat /init.sh | bash"
         depends_on:
-            - php
+            - api
 # Volumes
 volumes:
     mysqldata:
