@@ -37,8 +37,8 @@ class Operation implements EntityInterface
     private $source;
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $external_code;
+    #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'external_code')]
+    private $externalCode;
     #[ORM\Column(type: 'datetime')]
     private $date;
     #[ORM\Column(type: 'datetime')]
@@ -113,12 +113,12 @@ class Operation implements EntityInterface
 
     public function getExternalCode(): ?string
     {
-        return $this->external_code;
+        return $this->externalCode;
     }
 
     public function setExternalCode(?string $externalCode): self
     {
-        $this->external_code = $externalCode;
+        $this->externalCode = $externalCode;
 
         return $this;
     }

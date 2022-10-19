@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Entity;
+namespace App\Domain\Entity\DTO;
 
 class BinanceToken
 {

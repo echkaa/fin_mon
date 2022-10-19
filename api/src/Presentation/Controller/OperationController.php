@@ -16,7 +16,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 class OperationController extends AbstractController
 {
     /**
-     * @Route("/v1/operations/store", name="operation_store", methods={"POST"})
+     * @Route("/v1/operations", name="operation_store", methods={"POST"})
      * @OA\Post(summary="Store operation")
      * @OA\Response(response=Response::HTTP_CREATED, description="Created")
      * @OA\RequestBody(
@@ -50,7 +50,7 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/v1/operations/update", name="operation_update", methods={"PUT"})
+     * @Route("/v1/operations", name="operation_update", methods={"PUT"})
      * @OA\Put(summary="Update operation")
      * @OA\Response(response=Response::HTTP_OK, description="Update")
      * @OA\RequestBody(
@@ -67,7 +67,7 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/v1/operations/delete", name="operation_delete", methods={"DELETE"})
+     * @Route("/v1/operations", name="operation_delete", methods={"DELETE"})
      * @OA\Delete(summary="Delete operation")
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(

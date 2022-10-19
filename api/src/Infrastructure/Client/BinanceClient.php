@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Client;
 
-use App\Domain\Entity\BinanceToken;
+use App\Domain\Entity\DTO\BinanceToken;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;

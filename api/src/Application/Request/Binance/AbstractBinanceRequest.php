@@ -4,7 +4,7 @@ namespace App\Application\Request\Binance;
 
 use App\Infrastructure\Client\BinanceClient;
 use App\Application\Factory\TokenBinanceFactory;
-use App\Domain\Entity\BinanceToken;
+use App\Domain\Entity\DTO\BinanceToken;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractBinanceRequest

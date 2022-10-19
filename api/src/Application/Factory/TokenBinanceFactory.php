@@ -3,7 +3,7 @@
 namespace App\Application\Factory;
 
 use App\Domain\Contract\Encrypt\EncryptInterface;
-use App\Domain\Entity\BinanceToken;
+use App\Domain\Entity\DTO\BinanceToken;
 
 class TokenBinanceFactory
 {

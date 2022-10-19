@@ -7,6 +7,7 @@ use App\Domain\Contract\Command\OperationFillCommandInterface;
 use App\Domain\Entity\Operation;
 use Symfony\Component\Validator\Constraints as Assert;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @OA\Schema(
@@ -32,7 +33,10 @@ class OperationStoreCommand extends AbstractCommand implements OperationFillComm
     protected ?string $type = null;
     protected ?string $source = null;
     protected ?string $description = null;
-    protected ?string $external_code = null;
+    /**
+     * @SerializedName("external_code")
+     */
+    protected ?string $externalCode = null;
     /**
      * @Assert\DateTime()
      */
@@ -60,7 +64,7 @@ class OperationStoreCommand extends AbstractCommand implements OperationFillComm
 
     public function getExternalCode(): string
     {
-        return $this->external_code ?? Operation::EXTERNAL_CODE_API;
+        return $this->externalCode ?? Operation::EXTERNAL_CODE_API;
     }
 
     public function getDate(): string

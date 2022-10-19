@@ -3,7 +3,6 @@
 namespace App\Application\Command\Auth\Token;
 
 use App\Application\Command\AbstractCommand;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,13 +23,10 @@ class TokenCommand extends AbstractCommand
 {
     /**
      * @Assert\NotBlank(message="Username should not be blank.")
-     * @SerializedName("username")
-     * @OA\Property(property="username")
      */
     protected ?string $username = null;
     /**
      * @Assert\NotBlank(message="Username should not be blank.")
-     * @OA\Property(property="username")
      */
     protected ?string $password = null;
     /**
