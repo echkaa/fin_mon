@@ -28,6 +28,14 @@
     color: #61dafb;
 }
 
+.input-group {
+    margin: 15px;
+}
+
+.btn.margin-around {
+    margin: 15px;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

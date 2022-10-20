@@ -90,12 +90,12 @@ export default class OperationBlock extends React.Component {
             {
                 'Authorization': 'Bearer ' + this.context.state.token
             }
-        ).then(data => {
+        ).then(response => {
             let operationsByRange = getRangeDaysAsKeys(this.state.operationFilters.from, this.state.operationFilters.to);
 
             this.setState({
-                operations: data.result,
-                operationsByDay: data.result,
+                operations: response.result,
+                operationsByDay: response.result,
                 operationsByRange
             }, this.fillOperationsByRange);
         });

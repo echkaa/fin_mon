@@ -3,7 +3,7 @@ import {
     Route,
 } from "react-router-dom";
 
-import TestPage from "./pages/Test";
+import SettingPage from "./pages/Setting";
 import DashboardPage from "./pages/Dashboard";
 
 import LoginPage from "./pages/auth/Login";
@@ -19,7 +19,7 @@ export default function RouteList() {
     return (
         <Routes>
             <Route path="*" element={<RouteAdminGuard page={<AppPage content={<DashboardPage/>}/>}/>}/>
-            <Route path="test" element={<RouteAdminGuard page={<AppPage content={<TestPage/>}/>}/>}/>
+            <Route path="setting" element={<RouteAdminGuard page={<AppPage content={<SettingPage/>}/>}/>}/>
 
             <Route path="login" element={<RouteAuthGuard page={<AuthPage content={<LoginPage/>}/>}/>}/>
             <Route path="registration"

@@ -19,9 +19,12 @@ function encodeQueryData(obj, prefix) {
 }
 
 export function executeWithCheckOnError(response, callback) {
-    return response.error !== undefined
-        ? NotificationError(response.error.message)
-        : callback(response)
+    if (response.error !== undefined) {
+        NotificationError(response.error.message);
+        throw response.error.message;
+    }
+
+    return callback(response);
 }
 
 export async function requestWithAuthCheck(url, method, body = null, headers = null) {
@@ -29,21 +32,25 @@ export async function requestWithAuthCheck(url, method, body = null, headers = n
         url = url + "?" + encodeQueryData(body);
     }
 
-    let response = await fetch(url, {
-        method: method,
-        headers: headers,
-        body: method === 'POST' ? body : null
-    }).then(function (response) {
-        if (response.status === 401) {
-            logout();
-        }
+    let status = null,
+        response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: method !== 'GET' ? JSON.stringify(body) : null
+        }).then(function (response) {
+            if (response.status === 401) {
+                logout();
+            }
 
-        return response.json();
-    });
+            status = response.status;
+
+            return response.json();
+        });
+
+    response.status = status;
 
     return executeWithCheckOnError(
         response,
-        function (response) {
-            return response;
-        });
+        (response) => response
+    )
 }

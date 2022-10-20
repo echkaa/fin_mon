@@ -21,9 +21,9 @@ export default function AppSitebar() {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/test">
+                                    <Link className="nav-link" to="/setting">
                                         <i className="far fa-circle nav-icon"></i>
-                                        <p>Test</p>
+                                        <p>Setting</p>
                                     </Link>
                                 </li>
                             </ul>
