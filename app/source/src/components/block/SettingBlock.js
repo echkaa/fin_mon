@@ -9,56 +9,14 @@ export default class SettingBlock extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            setting: {
-                binance_public_key: '',
-                binance_secret_key: '',
-                mono_bank_token: '',
-            }
-        };
-
-        this.setBinancePublicKey = this.setBinancePublicKey.bind(this);
-        this.setBinanceSecretKey = this.setBinanceSecretKey.bind(this);
-        this.setMonoBankToken = this.setMonoBankToken.bind(this);
         this.saveSetting = this.saveSetting.bind(this);
-    }
-
-    setBinancePublicKey(event) {
-        let state = this.state;
-        state.setting.binance_public_key = event.target.value;
-
-        this.setState(state)
-    }
-
-    setBinanceSecretKey(event) {
-        let state = this.state;
-        state.setting.binance_secret_key = event.target.value;
-
-        this.setState(state)
-    }
-
-    setMonoBankToken(event) {
-        let state = this.state;
-        state.setting.mono_bank_token = event.target.value;
-
-        this.setState(state)
-    }
-
-    componentDidMount() {
-        this.setState({
-            setting: {
-                binance_public_key: this.context.state.setting.binance_public_key,
-                binance_secret_key: this.context.state.setting.binance_secret_key,
-                mono_bank_token: this.context.state.setting.mono_bank_token,
-            }
-        })
     }
 
     saveSetting() {
         requestWithAuthCheck(
             '/api/v1/setting',
             'PUT',
-            this.state.setting,
+            this.context.state.setting,
             {
                 'Authorization': 'Bearer ' + this.context.state.token
             }
@@ -77,8 +35,8 @@ export default class SettingBlock extends React.Component {
                                 <span className="input-group-text" id="inputGroup-sizing-sm">Binance Public Key</span>
                             </div>
 
-                            <input value={this.state.setting.binance_public_key || ''}
-                                   onChange={this.setBinancePublicKey}
+                            <input value={this.context.state.setting.binance_public_key || ''}
+                                   onChange={this.context.setBinancePublicKey}
                                    type="text"
                                    className="form-control"/>
                         </div>
@@ -88,8 +46,8 @@ export default class SettingBlock extends React.Component {
                                 <span className="input-group-text" id="inputGroup-sizing-sm">Binance Secret Key</span>
                             </div>
 
-                            <input value={this.state.setting.binance_secret_key || ''}
-                                   onChange={this.setBinanceSecretKey}
+                            <input value={this.context.state.setting.binance_secret_key || ''}
+                                   onChange={this.context.setBinanceSecretKey}
                                    type="text"
                                    className="form-control"/>
                         </div>
@@ -99,8 +57,8 @@ export default class SettingBlock extends React.Component {
                                 <span className="input-group-text" id="inputGroup-sizing-sm">MonoBank Token</span>
                             </div>
 
-                            <input value={this.state.setting.mono_bank_token || ''}
-                                   onChange={this.setMonoBankToken}
+                            <input value={this.context.state.setting.mono_bank_token || ''}
+                                   onChange={this.context.setMonoBankToken}
                                    type="text"
                                    className="form-control"/>
                         </div>

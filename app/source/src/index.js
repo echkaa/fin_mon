@@ -10,17 +10,15 @@ import './css/App.css'
 import '../node_modules/admin-lte/dist/js/adminlte.js';
 
 import RouteList from "./RouteList";
-import {UserProvider} from "./entity/UserContext";
 import User from "./entity/User";
 
-const user = new User();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
-        <UserProvider value={user}>
+        <User>
             <RouteList/>
 
             <ToastContainer/>
-        </UserProvider>
+        </User>
     </BrowserRouter>
 );
