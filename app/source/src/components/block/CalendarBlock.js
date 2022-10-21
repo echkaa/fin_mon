@@ -6,13 +6,17 @@ export default class CalendarBlock extends React.Component {
             emptyRow = [null, null, null, null, null, null, null],
             currentRow = [...emptyRow];
 
-        dataObject.map(function (item, index) {
-            if (item.newLine) {
+        dataObject.map(function (item) {
+            if (item.newLine === true) {
                 rows.push(currentRow);
                 currentRow = [...emptyRow];
             }
 
-            currentRow[index % 7] = item;
+            let dayOfWeek = item.date.day();
+
+            dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+            currentRow[dayOfWeek] = item;
         });
 
         rows.push(currentRow);
@@ -75,5 +79,6 @@ const styles = {
         color: "#12b705",
         fontSize: "2.0vw",
         marginTop: "10px",
+        cursor: "pointer"
     }
 };

@@ -11,7 +11,7 @@ function getRangeDate(startDate, endDate, type, decorateFunction = null) {
     let toDate = moment(endDate)
     let diff = toDate.diff(fromDate, type)
     let range = []
-    for (let i = 0; i < diff; i++) {
+    for (let i = 0; i <= diff; i++) {
         range.push(moment(startDate).add(i, type))
     }
 
@@ -34,7 +34,7 @@ export function getRangeDaysAsKeys(startDate, endDate) {
                 decodedRange.push({
                     value: 0,
                     date: date,
-                    newLine: parseInt(date.format('d')) === 1 || parseInt(date.format('DD')) === 1,
+                    newLine: parseInt(date.day()) === 1 || parseInt(date.format('DD')) === 1,
                 });
             });
 
