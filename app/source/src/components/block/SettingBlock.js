@@ -43,11 +43,11 @@ export default class SettingBlock extends React.Component {
 
                         <div className="input-group">
                             <div className="input-group-prepend">
-                                <span className="input-group-text" id="inputGroup-sizing-sm">Binance Secret Key</span>
+                                <span className="input-group-text" id="inputGroup-sizing-sm">Binance Private Key</span>
                             </div>
 
-                            <input value={this.context.state.setting.binance_secret_key || ''}
-                                   onChange={this.context.setBinanceSecretKey}
+                            <input value={this.context.state.setting.binance_private_key || ''}
+                                   onChange={this.context.setBinancePrivateKey}
                                    type="text"
                                    className="form-control"/>
                         </div>

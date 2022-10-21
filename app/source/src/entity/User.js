@@ -12,14 +12,14 @@ export default class User extends React.Component {
             username: '',
             setting: {
                 binance_public_key: null,
-                binance_secret_key: null,
+                binance_private_key: null,
                 mono_bank_token: null,
             },
             profile: null,
         };
 
         this.setBinancePublicKey = this.setBinancePublicKey.bind(this);
-        this.setBinanceSecretKey = this.setBinanceSecretKey.bind(this);
+        this.setBinancePrivateKey = this.setBinancePrivateKey.bind(this);
         this.setMonoBankToken = this.setMonoBankToken.bind(this);
     }
 
@@ -30,9 +30,9 @@ export default class User extends React.Component {
         this.setState(state)
     }
 
-    setBinanceSecretKey(event) {
+    setBinancePrivateKey(event) {
         let state = this.state;
-        state.setting.binance_secret_key = event.target.value;
+        state.setting.binance_private_key = event.target.value;
 
         this.setState(state)
     }
@@ -71,7 +71,7 @@ export default class User extends React.Component {
             <UserContext.Provider value={{
                 state: this.state,
                 setBinancePublicKey: this.setBinancePublicKey,
-                setBinanceSecretKey: this.setBinanceSecretKey,
+                setBinancePrivateKey: this.setBinancePrivateKey,
                 setMonoBankToken: this.setMonoBankToken,
             }}>
                 {this.props.children}
