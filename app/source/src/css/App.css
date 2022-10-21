@@ -36,6 +36,17 @@
     margin: 15px;
 }
 
+.plus_pnl span {
+    color: #1c7430;
+    font-weight: bold;
+}
+
+.minus_pnl span {
+    color: #a12b03;
+    font-weight: bold;
+    font-size: large;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

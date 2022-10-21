@@ -5,6 +5,7 @@ import {
 
 import SettingPage from "./pages/Setting";
 import DashboardPage from "./pages/Dashboard";
+import BinancePage from "./pages/Binance";
 
 import LoginPage from "./pages/auth/Login";
 import RegistrationPage from "./pages/auth/Registration";
@@ -20,6 +21,7 @@ export default function RouteList() {
         <Routes>
             <Route path="*" element={<RouteAdminGuard page={<AppPage content={<DashboardPage/>}/>}/>}/>
             <Route path="setting" element={<RouteAdminGuard page={<AppPage content={<SettingPage/>}/>}/>}/>
+            <Route path="binance" element={<RouteAdminGuard page={<AppPage content={<BinancePage/>}/>}/>}/>
 
             <Route path="login" element={<RouteAuthGuard page={<AuthPage content={<LoginPage/>}/>}/>}/>
             <Route path="registration"

@@ -24,6 +24,14 @@ export default function AppSitebar() {
                                         <p>Dashboard</p>
                                     </Link>
                                 </li>
+
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/binance">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Binance</p>
+                                    </Link>
+                                </li>
+
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/setting">
                                         <i className="far fa-circle nav-icon"></i>
