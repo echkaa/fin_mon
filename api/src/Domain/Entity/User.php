@@ -8,10 +8,11 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JsonSerializable;
 
 #[ORM\Entity(repositoryClass: UserRepositoryInterface::class)]
 #[ORM\HasLifecycleCallbacks]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityInterface, JsonSerializable
 {
     const USER_ROLE = 'USER_ROLE';
     #[ORM\Id]
@@ -108,11 +109,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
 
     public function eraseCredentials()
     {
-
     }
 
     public function getUserIdentifier(): string
     {
         return $this->username;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function getSetting(): ?Setting
+    {
+        return $this->setting;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'username' => $this->getUsername(),
+            'profile' => $this->getProfile(),
+            'setting' => $this->getSetting(),
+        ];
     }
 }
