@@ -27,7 +27,7 @@ export default class CalendarBlock extends React.Component {
     render() {
         return (
             <div>
-                {this.getDataRows(this.props.data).map((row, index) => {
+                {this.getDataRows(this.props.rangeOfDays).map((row, index) => {
                     return (
                         <ul key={index} style={styles.ul}>
                             {row.map((item, index) => {
@@ -40,8 +40,9 @@ export default class CalendarBlock extends React.Component {
                                 return (
                                     <li key={index} style={{...styles.liItem, ...styles.liItemFilled}}>
                                         <div style={styles.divDate}>{item.date.format('DD.MM')}</div>
-                                        <div style={styles.divAmount} data-date={item.date.format('DD.MM.YYYY')}
-                                             onClick={this.props.selectDay}>{item.value}</div>
+                                        <div style={styles.divAmount}
+                                             data-date={item.date.format('DD-MM-YYYY')}
+                                             onClick={this.props.selectDay}>{this.props.getAmountForDate(item.date.format('DD-MM-YYYY'))}</div>
                                     </li>
                                 );
                             })}

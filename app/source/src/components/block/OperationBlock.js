@@ -13,8 +13,8 @@ export default class OperationBlock extends React.Component {
 
         this.state = {
             operations: [],
-            operationsByDay: [],
-            operationsByRange: [],
+            operationsByDays: {},
+            rangeOfDays: [],
             operationFilters: {
                 selectDay: null,
                 from: moment().subtract(1, 'month').format('YYYY-MM-DD'),
@@ -25,56 +25,67 @@ export default class OperationBlock extends React.Component {
         this.setFromDate = this.setFromDate.bind(this);
         this.setToDate = this.setToDate.bind(this);
         this.setSelectDay = this.setSelectDay.bind(this);
+        this.getAmountForDate = this.getAmountForDate.bind(this);
+        this.getCurrentDay = this.getCurrentDay.bind(this);
     }
 
     setFromDate(event) {
         let state = this.state;
         state.operationFilters.from = event.target.value;
 
-        this.setState(state)
+        this.setState(state, this.setOperations)
     }
 
     setToDate(event) {
         let state = this.state;
         state.operationFilters.to = event.target.value;
 
-        this.setState(state)
+        this.setState(state, this.setOperations)
     }
 
     setSelectDay(event) {
         let state = this.state;
         state.operationFilters.selectDay = event.target.getAttribute('data-date');
 
-        this.setState(state, this.setOperationForDay)
+        this.setState(state)
     }
 
     componentDidMount() {
         this.setOperations()
     }
 
-    setOperationForDay() {
-        let operationsByDay = this.state.operations,
-            selectDay = this.state.operationFilters.selectDay;
+    groupOperationsByDays() {
+        let operationsByDays = {};
 
-        operationsByDay = operationsByDay.filter((operation) => operation.date === selectDay);
+        this.state.operations.map(function (operation) {
+            let date = moment(operation.date).format('DD-MM-YYYY');
+
+            if (operationsByDays[date] === undefined) {
+                operationsByDays[date] = {
+                    amount: 0,
+                    operations: [],
+                };
+            }
+
+            operationsByDays[date].amount += operation.amount;
+            operationsByDays[date].operations.push(operation);
+        })
 
         this.setState({
-            operationsByDay
-        })
+            operationsByDays: operationsByDays
+        });
     }
 
-    fillOperationsByRange() {
-        let operationsByRange = this.state.operationsByRange;
+    getAmountForDate(date) {
+        return this.state.operationsByDays[date] === undefined
+            ? 0
+            : this.state.operationsByDays[date].amount;
+    }
 
-        operationsByRange.map(function (item) {
-            item.value = Math.floor(Math.random() * 10000);
-
-            return item;
-        })
-
-        this.setState({
-            operationsByRange
-        });
+    getCurrentDay() {
+        return this.state.operationsByDays[this.state.operationFilters.selectDay] === undefined
+            ? {operations: []}
+            : this.state.operationsByDays[this.state.operationFilters.selectDay]
     }
 
     setOperations() {
@@ -91,13 +102,12 @@ export default class OperationBlock extends React.Component {
                 'Authorization': 'Bearer ' + this.context.state.token
             }
         ).then(response => {
-            let operationsByRange = getRangeDaysAsKeys(this.state.operationFilters.from, this.state.operationFilters.to);
+            let rangeOfDays = getRangeDaysAsKeys(this.state.operationFilters.from, this.state.operationFilters.to);
 
             this.setState({
                 operations: response.result,
-                operationsByDay: response.result,
-                operationsByRange
-            }, this.fillOperationsByRange);
+                rangeOfDays
+            }, this.groupOperationsByDays);
         });
     }
 
@@ -130,11 +140,21 @@ export default class OperationBlock extends React.Component {
 
                 <div className="row">
                     <div className="col-md-9">
-                        <CalendarBlock data={this.state.operationsByRange} selectDay={this.setSelectDay}/>
+                        <CalendarBlock
+                            rangeOfDays={this.state.rangeOfDays}
+                            getAmountForDate={this.getAmountForDate}
+                            selectDay={this.setSelectDay}/>
                     </div>
 
                     <div className="col-md-3">
-                        {this.state.operationsByDay.map((operation, index) => {
+                        {this.state.operationFilters.selectDay ? (
+                            <div>Select day: {this.state.operationFilters.selectDay}</div>
+                        ) : (
+                            <div>For display operations select day</div>
+                        )}
+
+
+                        {this.getCurrentDay().operations.map((operation, index) => {
                             return (
                                 <div key={index}>
                                     <div style={{
