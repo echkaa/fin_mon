@@ -3,6 +3,7 @@
 namespace App\Application\Command\Binance\Signature;
 
 use App\Application\Factory\TokenBinanceFactory;
+use App\Application\Service\UserService;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -15,6 +16,7 @@ class BinanceSignatureHandler implements MessageHandlerInterface
     public function __construct(
         private SerializerInterface $serializer,
         private TokenBinanceFactory $tokenBinanceFactory,
+        private UserService $userService,
     ) {
     }
 
@@ -26,8 +28,8 @@ class BinanceSignatureHandler implements MessageHandlerInterface
         parse_str($command->getParams(), $params);
 
         $token = $this->tokenBinanceFactory->create(
-            publicKey: $command->getPublicKey(),
-            privateKey: $command->getPrivateKey(),
+            publicKey: $this->userService->getCurrentUser()->getSetting()->getBinancePublicKey(),
+            privateKey: $this->userService->getCurrentUser()->getSetting()->getBinancePrivateKey(),
             params: $params,
         );
 

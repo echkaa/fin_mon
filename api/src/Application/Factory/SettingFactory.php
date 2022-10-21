@@ -23,7 +23,7 @@ class SettingFactory implements SettingFactoryInterface
     {
         return $entity
             ->setBinancePublicKey($command->getBinancePublicKey())
-            ->setBinanceSecretKey($command->getBinanceSecretKey())
+            ->setBinancePrivateKey($command->getBinancePrivateKey())
             ->setMonoBankToken($command->getMonoBankToken())
             ->setUser($this->userService->getCurrentUser());
     }

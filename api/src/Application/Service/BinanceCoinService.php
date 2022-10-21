@@ -16,11 +16,11 @@ class BinanceCoinService
     ) {
     }
 
-    public function filterCoinsByList(Collection $coins, array $coinNeedList): Collection
+    public function filterCoinsByList(Collection $coins, ?array $coinNeedList): Collection
     {
         return $coins->filter(
             function (BinanceBalanceCoin $coin) use ($coinNeedList) {
-                return in_array($coin->getName(), $coinNeedList);
+                return $coinNeedList === null || in_array($coin->getName(), $coinNeedList);
             }
         );
     }
@@ -42,29 +42,29 @@ class BinanceCoinService
     public function fillRealPrice(Collection $coins): Collection
     {
         return $coins->map(function (BinanceBalanceCoin $coin) {
-            $allTrade = $this->myTradesRequest->sendRequest($coin->getPairName());
-            $price = $indexStartCalc = $quantity = 0;
-
-            for ($i = count($allTrade) - 1; $i >= 0; $i--) {
-                $quantity += ($allTrade[$i]['isBuyer'] ? 1 : -1) * $allTrade[$i]['qty'];
-
-                if ($quantity >= 0 && $quantity * $coin->getMarketPrice() <= 10) {
-                    $indexStartCalc = $i + ($allTrade[$i]['isBuyer'] ? 0 : 1);
-                    break;
-                }
-            }
-
-            $quantity = 0;
-
-            for ($i = $indexStartCalc; $i < count($allTrade); $i++) {
-                if ($allTrade[$i]['isBuyer']) {
-                    $price = ($price * $quantity + $allTrade[$i]['price'] * $allTrade[$i]['qty']) / ($quantity + $allTrade[$i]['qty']);
-                }
-
-                $quantity += ($allTrade[$i]['isBuyer'] ? 1 : -1) * $allTrade[$i]['qty'];
-            }
-
             try {
+                $allTrade = $this->myTradesRequest->sendRequest($coin->getPairName());
+                $price = $indexStartCalc = $quantity = 0;
+
+                for ($i = count($allTrade) - 1; $i >= 0; $i--) {
+                    $quantity += ($allTrade[$i]['isBuyer'] ? 1 : -1) * $allTrade[$i]['qty'];
+
+                    if ($quantity >= 0 && $quantity * $coin->getMarketPrice() <= 10) {
+                        $indexStartCalc = $i + ($allTrade[$i]['isBuyer'] ? 0 : 1);
+                        break;
+                    }
+                }
+
+                $quantity = 0;
+
+                for ($i = $indexStartCalc; $i < count($allTrade); $i++) {
+                    if ($allTrade[$i]['isBuyer']) {
+                        $price = ($price * $quantity + $allTrade[$i]['price'] * $allTrade[$i]['qty']) / ($quantity + $allTrade[$i]['qty']);
+                    }
+
+                    $quantity += ($allTrade[$i]['isBuyer'] ? 1 : -1) * $allTrade[$i]['qty'];
+                }
+
                 $coin->setFactPrice($price);
             } catch (Throwable) {
             }

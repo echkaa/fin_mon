@@ -35,7 +35,7 @@ class SettingUpdateCommand extends AbstractCommand
         return $this->binancePublicKey;
     }
 
-    public function getBinanceSecretKey(): ?string
+    public function getBinancePrivateKey(): ?string
     {
         return $this->binanceSecretKey;
     }

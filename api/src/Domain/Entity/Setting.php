@@ -17,8 +17,8 @@ class Setting implements EntityInterface, JsonSerializable
     private $id;
     #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'binance_public_key')]
     private $binancePublicKey;
-    #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'binance_secret_key')]
-    private $binanceSecretKey;
+    #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'binance_private_key')]
+    private $binancePrivateKey;
     #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'mono_bank_token')]
     private $monoBankToken;
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'setting')]
@@ -44,16 +44,16 @@ class Setting implements EntityInterface, JsonSerializable
         return $this->binancePublicKey;
     }
 
-    public function setBinanceSecretKey(string $binanceSecretKey): self
+    public function setBinancePrivateKey(string $binancePrivateKey): self
     {
-        $this->binanceSecretKey = $binanceSecretKey;
+        $this->binancePrivateKey = $binancePrivateKey;
 
         return $this;
     }
 
-    public function getBinanceSecretKey(): ?string
+    public function getBinancePrivateKey(): ?string
     {
-        return $this->binanceSecretKey;
+        return $this->binancePrivateKey;
     }
 
     public function setMonoBankToken(string $monoBankToken): self
@@ -72,7 +72,7 @@ class Setting implements EntityInterface, JsonSerializable
     {
         return [
             'binance_public_key' => $this->getBinancePublicKey(),
-            'binance_secret_key' => $this->getBinanceSecretKey(),
+            'binance_private_key' => $this->getBinancePrivateKey(),
             'mono_bank_token' => $this->getMonoBankToken(),
         ];
     }
