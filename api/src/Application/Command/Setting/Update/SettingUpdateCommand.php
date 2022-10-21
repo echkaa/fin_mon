@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  * @OA\Schema(
  *     example={
  *         "binance_public_key": "",
- *         "binance_secret_key": "",
+ *         "binance_private_key": "",
  *         "mono_bank_token": "",
  *     }
  * )
@@ -22,9 +22,9 @@ class SettingUpdateCommand extends AbstractCommand
      */
     protected ?string $binancePublicKey = null;
     /**
-     * @SerializedName("binance_secret_key")
+     * @SerializedName("binance_private_key")
      */
-    protected ?string $binanceSecretKey = null;
+    protected ?string $binancePrivateKey = null;
     /**
      * @SerializedName("mono_bank_token")
      */
@@ -37,7 +37,7 @@ class SettingUpdateCommand extends AbstractCommand
 
     public function getBinancePrivateKey(): ?string
     {
-        return $this->binanceSecretKey;
+        return $this->binancePrivateKey;
     }
 
     public function getMonoBankToken(): ?string
