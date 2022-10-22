@@ -28,7 +28,7 @@ class OperationUpdateHandler implements MessageHandlerInterface
         $entity = $this->operationRepository->findByOne($command->getId());
 
         $this->operationRepository->update(
-            $this->operationFactory->fillEntity($entity, $command),
+            $this->operationFactory->fillEntityFromCommand($entity, $command),
         );
 
         return new HttpResponse(

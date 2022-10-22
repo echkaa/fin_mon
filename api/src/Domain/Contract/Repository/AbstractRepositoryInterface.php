@@ -17,4 +17,6 @@ interface AbstractRepositoryInterface
     function findByOne(int $id): ?EntityInterface;
 
     function getEntityClassName(): string;
+
+    function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null);
 }

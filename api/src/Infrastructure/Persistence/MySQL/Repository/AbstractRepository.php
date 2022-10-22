@@ -57,9 +57,4 @@ abstract class AbstractRepository extends ServiceEntityRepository
 
         return $entity;
     }
-
-    public function findByCriteria(array $criteria): array
-    {
-        return $this->findBy($criteria);
-    }
 }

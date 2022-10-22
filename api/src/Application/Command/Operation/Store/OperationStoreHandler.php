@@ -28,7 +28,7 @@ class OperationStoreHandler implements MessageHandlerInterface
         $entity = $this->operationFactory->getInstance();
 
         $this->operationRepository->store(
-            $this->operationFactory->fillEntity($entity, $command),
+            $this->operationFactory->fillEntityFromCommand($entity, $command),
         );
 
         return new HttpResponse(

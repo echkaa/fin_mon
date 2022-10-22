@@ -3,11 +3,13 @@
 namespace App\Domain\Contract\Factory;
 
 use App\Domain\Contract\Command\OperationFillCommandInterface;
-use App\Domain\Contract\Entity\EntityInterface;
+use App\Domain\Entity\Operation;
 
 interface OperationFactoryInterface
 {
-    public function getInstance(): EntityInterface;
+    public function getInstance(): Operation;
 
-    public function fillEntity(EntityInterface $entity, OperationFillCommandInterface $command): EntityInterface;
+    public function fillEntityFromCommand(Operation $entity, OperationFillCommandInterface $command): Operation;
+
+    public function fillEntityFromMonoBank(Operation $entity, array $data): Operation;
 }

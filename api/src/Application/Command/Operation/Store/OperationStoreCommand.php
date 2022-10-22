@@ -52,11 +52,6 @@ class OperationStoreCommand extends AbstractCommand implements OperationFillComm
         return $this->type;
     }
 
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;

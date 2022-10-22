@@ -16,20 +16,30 @@ class OperationFactory implements OperationFactoryInterface
     ) {
     }
 
-    public function getInstance(): EntityInterface
+    public function getInstance(): Operation
     {
         return new Operation();
     }
 
-    public function fillEntity(EntityInterface $entity, OperationFillCommandInterface $command): EntityInterface
+    public function fillEntityFromCommand(Operation $entity, OperationFillCommandInterface $command): Operation
     {
         return $entity
             ->setAmount($command->getAmount())
             ->setDescription($command->getDescription())
             ->setExternalCode($command->getExternalCode())
-            ->setSource($command->getSource())
             ->setType($command->getType())
             ->setDate(new DateTime($command->getDate()))
+            ->setUser($this->userService->getCurrentUser());
+    }
+
+    public function fillEntityFromMonoBank(Operation $entity, array $data): Operation
+    {
+        return $entity
+            ->setAmount(($data['amount'] * -1) / 100)
+            ->setDescription($data['description'])
+            ->setExternalId($data['id'])
+            ->setExternalCode(Operation::EXTERNAL_CODE_MONOBANK)
+            ->setDate((new DateTime())->setTimestamp($data['time']))
             ->setUser($this->userService->getCurrentUser());
     }
 }

@@ -32,7 +32,12 @@ class Setting implements EntityInterface, JsonSerializable
         return $this;
     }
 
-    public function setBinancePublicKey(string $binancePublicKey): self
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setBinancePublicKey(?string $binancePublicKey): self
     {
         $this->binancePublicKey = $binancePublicKey;
 
@@ -44,7 +49,7 @@ class Setting implements EntityInterface, JsonSerializable
         return $this->binancePublicKey;
     }
 
-    public function setBinancePrivateKey(string $binancePrivateKey): self
+    public function setBinancePrivateKey(?string $binancePrivateKey): self
     {
         $this->binancePrivateKey = $binancePrivateKey;
 
@@ -56,7 +61,7 @@ class Setting implements EntityInterface, JsonSerializable
         return $this->binancePrivateKey;
     }
 
-    public function setMonoBankToken(string $monoBankToken): self
+    public function setMonoBankToken(?string $monoBankToken): self
     {
         $this->monoBankToken = $monoBankToken;
 

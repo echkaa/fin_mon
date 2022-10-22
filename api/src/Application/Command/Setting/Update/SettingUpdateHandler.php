@@ -27,7 +27,7 @@ class SettingUpdateHandler implements MessageHandlerInterface
      */
     public function __invoke(SettingUpdateCommand $command): ResponseInterface
     {
-        $setting = $this->settingRepository->findByCriteria([
+        $setting = $this->settingRepository->findBy([
             "user" => $this->userService->getCurrentUser()->getId(),
         ]);
 

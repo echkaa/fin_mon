@@ -25,7 +25,7 @@ class OperationListHandler implements MessageHandlerInterface
      */
     public function __invoke(OperationListCommand $command): ResponseInterface
     {
-        $operations = $this->operationRepository->findByCriteria([
+        $operations = $this->operationRepository->findBy([
             "user" => $this->userService->getCurrentUser()->getId(),
         ]);
 

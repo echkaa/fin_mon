@@ -38,4 +38,11 @@ class UserService
             'username' => $this->security->getUser()->getUserIdentifier(),
         ]);
     }
+
+    public function setUserById(int $userId): void
+    {
+        $this->user = $this->userRepository->findOneBy([
+            'id' => $userId,
+        ]);
+    }
 }

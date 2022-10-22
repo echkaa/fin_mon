@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Operation implements EntityInterface
 {
     public const EXTERNAL_CODE_API = 'api';
+    public const EXTERNAL_CODE_MONOBANK = 'monobank';
     public const OPERATION_TYPE_FOOD = 'food';
     public const OPERATION_TYPE_MONTHLY = 'monthly';
     public const OPERATION_TYPE_DEPOSIT = 'deposit';
@@ -33,12 +34,12 @@ class Operation implements EntityInterface
     private $amount;
     #[ORM\Column(type: 'integer', nullable: true)]
     private $type;
-    #[ORM\Column(type: 'string', length: 30, nullable: true)]
-    private $source;
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
     #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'external_code')]
     private $externalCode;
+    #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'external_id')]
+    private $externalId;
     #[ORM\Column(type: 'datetime')]
     private $date;
     #[ORM\Column(type: 'datetime')]
@@ -87,18 +88,6 @@ class Operation implements EntityInterface
         return $this;
     }
 
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(?string $source): self
-    {
-        $this->source = $source;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -107,6 +96,18 @@ class Operation implements EntityInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getExternalId(): ?string
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId(?string $externalId): self
+    {
+        $this->externalId = $externalId;
 
         return $this;
     }

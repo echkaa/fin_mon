@@ -11,4 +11,12 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
     {
         return Setting::class;
     }
+
+    public function getNotNullList(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.monoBankToken is not null')
+            ->getQuery()
+            ->getResult();
+    }
 }

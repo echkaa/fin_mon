@@ -8,8 +8,6 @@ interface OperationFillCommandInterface
 
     public function getType(): ?string;
 
-    public function getSource(): ?string;
-
     public function getDescription(): ?string;
 
     public function getExternalCode(): string;
