@@ -45,8 +45,7 @@ class MonoBankOperationCommand extends Command
                 $this->userService->setUserById($setting->getUser()->getId());
 
                 $this->saveOperations($operations);
-            } catch (Throwable $exception) {
-                dd($exception->getMessage());
+            } catch (Throwable) {
             }
         }
 
