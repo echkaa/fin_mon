@@ -62,9 +62,9 @@ export default class User extends React.Component {
             this.setState({
                 username: response.result.username,
                 setting: {
-                    binance_public_key: response.result.binance_public_key,
-                    binance_private_key: response.result.binance_private_key,
-                    mono_bank_token: response.result.mono_bank_token,
+                    binance_public_key: response.result.setting.binance_public_key,
+                    binance_private_key: response.result.setting.binance_private_key,
+                    mono_bank_token: response.result.setting.mono_bank_token,
                 }
             })
         });

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment'
-import {getRangeDaysAsKeys} from "../../functions/CommonFunctions";
+import {getRangeDaysAsKeys, round} from "../../functions/CommonFunctions";
 import UserContext from "../../entity/UserContext";
 import {requestWithAuthCheck} from "../../functions/RequestFunctions";
 import CalendarBlock from "./CalendarBlock";
@@ -67,7 +67,7 @@ export default class OperationBlock extends React.Component {
                 };
             }
 
-            operationsByDays[date].amount += operation.amount;
+            operationsByDays[date].amount = round(operationsByDays[date].amount + operation.amount);
             operationsByDays[date].operations.push(operation);
         })
 
@@ -156,13 +156,10 @@ export default class OperationBlock extends React.Component {
 
                         {this.getCurrentDay().operations.map((operation, index) => {
                             return (
-                                <div key={index}>
-                                    <div style={{
-                                        color: "rgb(80 193 45)",
-                                        fontWeight: 'bold'
-                                    }}>{operation.amount}</div>
-
-                                    <div>{operation.description}</div>
+                                <div key={index} style={styles.operationBlock}>
+                                    <span style={styles.spanAmount}>{operation.amount}</span>
+                                    &nbsp;-&nbsp;
+                                    <span style={styles.spanDescription}>{operation.description}</span>
                                 </div>
                             );
                         })}
@@ -172,3 +169,16 @@ export default class OperationBlock extends React.Component {
         );
     }
 }
+
+const styles = {
+    operationBlock: {
+        marginTop: "15px"
+    },
+    spanAmount: {
+        color: "rgb(80 193 45)",
+        fontWeight: 'bold'
+    },
+    spanDescription: {
+        fontSize: "0.8em"
+    }
+};

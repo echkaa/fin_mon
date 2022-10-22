@@ -42,3 +42,7 @@ export function getRangeDaysAsKeys(startDate, endDate) {
         }
     );
 }
+
+export function round(number) {
+    return Math.round(parseFloat(number) * 100) / 100;
+}
