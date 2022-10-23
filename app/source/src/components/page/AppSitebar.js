@@ -20,21 +20,21 @@ export default function AppSitebar() {
                             <ul className="nav nav-treeview">
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/">
-                                        <i className="far fa-circle nav-icon"></i>
+                                        <i className="fa-solid fa-chart-line nav-icon"></i>
                                         <p>Dashboard</p>
                                     </Link>
                                 </li>
 
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/binance">
-                                        <i className="far fa-circle nav-icon"></i>
+                                        <i className="fa-solid fa-wallet nav-icon"></i>
                                         <p>Binance</p>
                                     </Link>
                                 </li>
 
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/setting">
-                                        <i className="far fa-circle nav-icon"></i>
+                                        <i className="fa-solid fa-gear nav-icon"></i>
                                         <p>Setting</p>
                                     </Link>
                                 </li>
