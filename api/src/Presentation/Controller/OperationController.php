@@ -2,6 +2,7 @@
 
 namespace App\Presentation\Controller;
 
+use App\Application\Command\Operation\Archive\OperationArchiveCommand;
 use App\Application\Command\Operation\List\OperationListCommand;
 use App\Application\Command\Operation\Store\OperationStoreCommand;
 use App\Application\Command\Operation\Update\OperationUpdateCommand;
@@ -81,5 +82,22 @@ class OperationController extends AbstractController
     public function delete(): Response
     {
         return $this->response($this->handle(OperationDeleteCommand::class));
+    }
+
+    /**
+     * @Route("/v1/operations/archive", name="operation_archive", methods={"POST"})
+     * @OA\Post(summary="Archive operation")
+     * @OA\Response(response=Response::HTTP_CREATED, description="Created")
+     * @OA\RequestBody(
+     *     @OA\MediaType(mediaType="application/json",
+     *          @OA\Schema(ref=@Model(type=OperationArchiveCommand::class))
+     *     )
+     * )
+     * @Security(name="Bearer")
+     * @throws ExceptionInterface
+     */
+    public function archive(): Response
+    {
+        return $this->response($this->handle(OperationArchiveCommand::class));
     }
 }

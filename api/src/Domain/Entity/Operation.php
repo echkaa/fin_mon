@@ -40,6 +40,8 @@ class Operation implements EntityInterface
     private $externalCode;
     #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'external_id')]
     private $externalId;
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private $archive;
     #[ORM\Column(type: 'datetime')]
     private $date;
     #[ORM\Column(type: 'datetime')]
@@ -141,5 +143,17 @@ class Operation implements EntityInterface
         $this->user = $user;
 
         return $this;
+    }
+
+    public function setArchive(bool $archive): self
+    {
+        $this->archive = $archive;
+
+        return $this;
+    }
+
+    public function getArchive(): bool
+    {
+        return $this->archive;
     }
 }
