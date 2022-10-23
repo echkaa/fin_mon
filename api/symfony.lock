@@ -509,6 +509,9 @@
     "symfony/psr-http-message-bridge": {
         "version": "v2.1.2"
     },
+    "symfony/redis-messenger": {
+        "version": "v6.0.13"
+    },
     "symfony/routing": {
         "version": "6.0",
         "recipe": {

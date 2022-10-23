@@ -14,3 +14,6 @@
 
 > Generate migration  
 > php bin/console doctrine:migrations:diff
+
+> Set operations from monobank   
+> bin/console mono-bank:operations:setting

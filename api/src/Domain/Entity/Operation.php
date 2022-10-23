@@ -41,7 +41,7 @@ class Operation implements EntityInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'external_id')]
     private $externalId;
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
-    private $archive;
+    private $archive = false;
     #[ORM\Column(type: 'datetime')]
     private $date;
     #[ORM\Column(type: 'datetime')]

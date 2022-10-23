@@ -1,5 +1,7 @@
 FROM php:8.1-fpm
 
+RUN apt-get update
+
 RUN apt update -y && apt install -y --no-install-recommends \
     curl \
     gnupg2 \
@@ -18,7 +20,6 @@ RUN apt update -y && apt install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-install pdo pdo_mysql zip \
@@ -33,4 +34,7 @@ RUN pecl install xdebug \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable apcu
 
-WORKDIR /var/www/kava_project
+
+RUN apt-get install --no-install-recommends --no-install-suggests -y
+
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisor.conf"]

@@ -79,6 +79,29 @@ services:
         command: bash -c "cat /init.sh | bash"
         depends_on:
             - api
+
+    messenger:
+        build:
+            context: ./docker/supervisord
+        working_dir: /var/www/kava_project
+        depends_on:
+            - mysql
+            - redis
+        volumes:
+            - ./api:/var/www/kava_project
+            - ./docker/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisor.conf
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "5m"
+                max-file: "3"
+
+    redis:
+        image: "redis:6-alpine"
+        ports:
+            - "6379:6379"
+        volumes:
+            - ./storage/redis:/redis
 # Volumes
 volumes:
     mysqldata:

@@ -34,6 +34,7 @@
         "symfony/property-info": "6.0.*",
         "symfony/proxy-manager-bridge": "6.0.*",
         "symfony/psr-http-message-bridge": "^2.1",
+        "symfony/redis-messenger": "6.0.*",
         "symfony/runtime": "6.0.*",
         "symfony/serializer": "6.0.*",
         "symfony/twig-bundle": "6.0.*",
