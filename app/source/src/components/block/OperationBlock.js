@@ -5,6 +5,7 @@ import UserContext from "../../entity/UserContext";
 import {requestWithAuthCheck} from "../../functions/RequestFunctions";
 import CalendarBlock from "./CalendarBlock";
 import OperationChart from "./OperationChart";
+import {NotificationInfo} from "../../functions/NotificationFunctions";
 
 export default class OperationBlock extends React.Component {
     static contextType = UserContext;
@@ -32,6 +33,7 @@ export default class OperationBlock extends React.Component {
         this.setSelectDay = this.setSelectDay.bind(this);
         this.getAmountForDate = this.getAmountForDate.bind(this);
         this.getCurrentDay = this.getCurrentDay.bind(this);
+        this.sendToArchive = this.sendToArchive.bind(this);
     }
 
     setFromDate(event) {
@@ -160,11 +162,24 @@ export default class OperationBlock extends React.Component {
         });
     }
 
+    sendToArchive(event) {
+        requestWithAuthCheck(
+            '/api/v1/operations/archive',
+            'POST',
+            {
+                id: parseInt(event.target.getAttribute('data-id'))
+            },
+            {
+                'Authorization': 'Bearer ' + this.context.state.token
+            }
+        ).then(response => {
+            NotificationInfo('Archived')
+
+            this.setOperations();
+        })
+    }
+
     render() {
-
-
-        console.log(this.state.operationsByDescriptions);
-
         return (
             <div>
                 <div className="row">
@@ -215,6 +230,11 @@ export default class OperationBlock extends React.Component {
                             {this.getCurrentDay().operations.map((operation, index) => {
                                 return (
                                     <div key={index} style={styles.operationBlock}>
+                                        <i onClick={this.sendToArchive}
+                                           data-id={operation.id}
+                                           style={styles.archiveI}
+                                           className="fa-solid fa-box-archive"></i>
+
                                         <span style={styles.spanAmount}>{operation.amount}</span>
                                         &nbsp;-&nbsp;
                                         <span style={styles.spanDescription}>{operation.description}</span>
@@ -255,5 +275,10 @@ const styles = {
         margin: "10px",
         minWidth: "150px",
         maxWidth: "3000px"
+    },
+    archiveI: {
+        color: "#ff6e6e",
+        marginRight: "10px",
+        cursor: "pointer"
     }
 };
