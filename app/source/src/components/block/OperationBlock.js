@@ -139,8 +139,8 @@ export default class OperationBlock extends React.Component {
             'GET',
             {
                 filters: {
-                    fromDate: this.state.operationFilters.from,
-                    toDate: this.state.operationFilters.to,
+                    from: this.state.operationFilters.from,
+                    to: this.state.operationFilters.to,
                 }
             },
             {
