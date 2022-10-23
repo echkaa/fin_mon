@@ -44,7 +44,7 @@ class MonoBankOperationSettingHandler implements MessageHandlerInterface
                 $this->saveOperations($operations);
 
                 $this->logger->info(
-                    "Setting operations for user ",
+                    "Setting operations for user {$setting->getUser()->getId()}",
                 );
             } catch (Throwable $e) {
                 $this->logger->error(
