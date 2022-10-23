@@ -26,8 +26,12 @@ class OperationListCommand extends AbstractCommand
      *      },
      *      allowMissingFields=true
      * )
+     * @OA\Property(
+     *     type="array",
+     *     @OA\Items()
+     * )
      */
-    protected $filters;
+    protected ?array $filters = null;
 
     public function getFilters(): ?array
     {
