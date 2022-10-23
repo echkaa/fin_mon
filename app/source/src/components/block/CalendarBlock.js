@@ -78,7 +78,7 @@ const styles = {
         textAlign: 'right',
         fontWeight: 'bold',
         color: "#12b705",
-        fontSize: "2.0vw",
+        fontSize: "1.6vw",
         marginTop: "10px",
         cursor: "pointer"
     }

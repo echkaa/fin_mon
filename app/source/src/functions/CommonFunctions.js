@@ -46,3 +46,24 @@ export function getRangeDaysAsKeys(startDate, endDate) {
 export function round(number) {
     return Math.round(parseFloat(number) * 100) / 100;
 }
+
+export function getRandomColor() {
+    let randomR = Math.floor((Math.random() * 130) + 100);
+    let randomG = Math.floor((Math.random() * 130) + 100);
+    let randomB = Math.floor((Math.random() * 130) + 100);
+
+    return "rgb("
+        + randomR + ", "
+        + randomG + ", "
+        + randomB + ")";
+}
+
+export function getArrayRandomColor(countElements) {
+    let colors = [];
+
+    for (var i = 0; i < countElements; i++) {
+        colors.push(getRandomColor());
+    }
+
+    return colors;
+}

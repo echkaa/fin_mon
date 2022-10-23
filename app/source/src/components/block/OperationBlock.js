@@ -4,6 +4,7 @@ import {getRangeDaysAsKeys, round} from "../../functions/CommonFunctions";
 import UserContext from "../../entity/UserContext";
 import {requestWithAuthCheck} from "../../functions/RequestFunctions";
 import CalendarBlock from "./CalendarBlock";
+import OperationChart from "./OperationChart";
 
 export default class OperationBlock extends React.Component {
     static contextType = UserContext;
@@ -14,7 +15,11 @@ export default class OperationBlock extends React.Component {
         this.state = {
             operations: [],
             operationsByDays: {},
+            operationsByDescriptions: [],
             rangeOfDays: [],
+            statistic: {
+                sumOperation: 0,
+            },
             operationFilters: {
                 selectDay: null,
                 from: moment().subtract(1, 'month').format('YYYY-MM-DD'),
@@ -54,6 +59,34 @@ export default class OperationBlock extends React.Component {
         this.setOperations()
     }
 
+    groupOperationsByDescriptions() {
+        let operationsByDescriptions = {};
+
+        this.state.operations.map(function (operation) {
+            if (operationsByDescriptions[operation.description] === undefined) {
+                operationsByDescriptions[operation.description] = {
+                    amount: 0,
+                    description: operation.description,
+                    operations: [],
+                };
+            }
+
+            operationsByDescriptions[operation.description].amount = round(operationsByDescriptions[operation.description].amount + operation.amount);
+            operationsByDescriptions[operation.description].operations.push(operation);
+        })
+
+        operationsByDescriptions = Object.keys(operationsByDescriptions).map((key) => operationsByDescriptions[key]);
+
+        this.setState({
+            operationsByDescriptions: operationsByDescriptions.sort(this.sortByAmount)
+        });
+    }
+
+    sortByAmount(a, b) {
+        return a.amount < b.amount ? 1 :
+            a.amount > b.amount ? -1 : 0;
+    }
+
     groupOperationsByDays() {
         let operationsByDays = {};
 
@@ -73,6 +106,18 @@ export default class OperationBlock extends React.Component {
 
         this.setState({
             operationsByDays: operationsByDays
+        });
+    }
+
+    setStatistic() {
+        let sumOperation = 0;
+
+        this.state.operations.map(function (operation) {
+            sumOperation += operation.amount;
+        })
+
+        this.setState({
+            statistic: {sumOperation: round(sumOperation)},
         });
     }
 
@@ -107,11 +152,19 @@ export default class OperationBlock extends React.Component {
             this.setState({
                 operations: response.result,
                 rangeOfDays
-            }, this.groupOperationsByDays);
+            }, function () {
+                this.groupOperationsByDescriptions();
+                this.groupOperationsByDays();
+                this.setStatistic();
+            });
         });
     }
 
     render() {
+
+
+        console.log(this.state.operationsByDescriptions);
+
         return (
             <div>
                 <div className="row">
@@ -147,22 +200,34 @@ export default class OperationBlock extends React.Component {
                     </div>
 
                     <div className="col-md-3">
-                        {this.state.operationFilters.selectDay ? (
-                            <div>Select day: {this.state.operationFilters.selectDay}</div>
-                        ) : (
-                            <div>For display operations select day</div>
-                        )}
+                        <div style={{marginBottom: "20px"}}>
+                            SUM: <span style={{fontWeight: "bold"}}>{this.state.statistic.sumOperation}</span>
+                        </div>
+
+                        <div>
+                            {this.state.operationFilters.selectDay ? (
+                                <div>Select day: {this.state.operationFilters.selectDay}</div>
+                            ) : (
+                                <div>For display operations select day</div>
+                            )}
 
 
-                        {this.getCurrentDay().operations.map((operation, index) => {
-                            return (
-                                <div key={index} style={styles.operationBlock}>
-                                    <span style={styles.spanAmount}>{operation.amount}</span>
-                                    &nbsp;-&nbsp;
-                                    <span style={styles.spanDescription}>{operation.description}</span>
-                                </div>
-                            );
-                        })}
+                            {this.getCurrentDay().operations.map((operation, index) => {
+                                return (
+                                    <div key={index} style={styles.operationBlock}>
+                                        <span style={styles.spanAmount}>{operation.amount}</span>
+                                        &nbsp;-&nbsp;
+                                        <span style={styles.spanDescription}>{operation.description}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-8">
+                        <OperationChart operations={this.state.operationsByDescriptions}/>
                     </div>
                 </div>
             </div>
@@ -180,5 +245,15 @@ const styles = {
     },
     spanDescription: {
         fontSize: "0.8em"
+    },
+    descriptionContainer: {
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100%",
+    },
+    descriptionItem: {
+        margin: "10px",
+        minWidth: "150px",
+        maxWidth: "3000px"
     }
 };
