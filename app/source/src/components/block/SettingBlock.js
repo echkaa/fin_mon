@@ -61,6 +61,8 @@ export default class SettingBlock extends React.Component {
                                    onChange={this.context.setMonoBankToken}
                                    type="text"
                                    className="form-control"/>
+
+                            <a style={styles.link} target="_blank" href="https://api.monobank.ua/">Token</a>
                         </div>
 
                         <button onClick={this.saveSetting}
@@ -71,5 +73,12 @@ export default class SettingBlock extends React.Component {
                 </div>
             </div>
         );
+    }
+}
+
+const styles = {
+    link: {
+        marginTop: "5px",
+        marginLeft: "15px",
     }
 }
