@@ -102,6 +102,15 @@ services:
             - "6379:6379"
         volumes:
             - ./storage/redis:/redis
+
+    node:
+        build: node
+        depends_on:
+            - redis
+        volumes:
+            - ./node/source:/var/www/kava_project_node
+        ports:
+            - "9000:9000"
 # Volumes
 volumes:
     mysqldata:
