@@ -1,15 +1,20 @@
-FROM node:16-alpine
+FROM node:16-alpine AS deps
 
-ENV NODE_ENV=production
+WORKDIR /node_app
+
+COPY ./source/package*.json* ./
+
+RUN \
+    if [ -f package-lock.json ]; then npm i; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
+
+
+FROM node:16-alpine
 
 WORKDIR /var/www/kava_project_node
 
-COPY ["./source/package.json", "./source/package-lock.json*", "./"]
-
-RUN npm install --production
-
+COPY --from=deps /node_app/node_modules ./node_modules
 COPY ./source ./
-
-RUN ls ./src -l
 
 CMD [ "node", "./src/server.js" ]

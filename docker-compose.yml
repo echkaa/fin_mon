@@ -110,9 +110,9 @@ services:
         depends_on:
             - redis
         volumes:
-            - ./node/source:/var/www/kava_project_node
+            - ./node/source/src:/var/www/kava_project_node/src
         ports:
-            - "9000:9000"
+            - "9100:9000"
 # Volumes
 volumes:
     mysqldata:
