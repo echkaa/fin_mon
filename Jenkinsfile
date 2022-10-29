@@ -18,7 +18,7 @@ pipeline {
         }
         stage("Start containers") {
             steps {
-                sh 'docker-compose up -d --build --force-recreate'
+                sh 'docker-compose up -d --build'
                 sh 'docker ps'
             }
         }
