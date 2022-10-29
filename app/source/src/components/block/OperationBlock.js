@@ -207,14 +207,14 @@ export default class OperationBlock extends React.Component {
                 </div>
 
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-md-9 col-lg-9 col-xl-8">
                         <CalendarBlock
                             rangeOfDays={this.state.rangeOfDays}
                             getAmountForDate={this.getAmountForDate}
                             selectDay={this.setSelectDay}/>
                     </div>
 
-                    <div className="col-md-3">
+                    <div className="col-md-3 col-lg-3 col-xl-4">
                         <div style={{marginBottom: "20px"}}>
                             SUM: <span style={{fontWeight: "bold"}}>{this.state.statistic.sumOperation}</span>
                         </div>
