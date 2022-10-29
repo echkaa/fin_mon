@@ -29,10 +29,10 @@ RUN pecl install xdebug \
     && docker-php-ext-install zip \
     && docker-php-ext-install opcache \
     && docker-php-ext-install sockets \
-    && pecl install redis apcu \
+    && pecl install igbinary redis \
     && docker-php-ext-enable pcntl \
-    && docker-php-ext-enable redis \
-    && docker-php-ext-enable apcu
+    && docker-php-ext-enable igbinary \
+    && docker-php-ext-enable redis
 
 
 RUN apt-get install --no-install-recommends --no-install-suggests -y

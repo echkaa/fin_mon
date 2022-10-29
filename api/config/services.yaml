@@ -7,6 +7,8 @@ parameters:
     binance.api_url: '%env(resolve:BINANCE_API_URL)%'
     monobank.api_url: '%env(resolve:MONOBANK_API_URL)%'
 
+    redis.url: '%env(resolve:REDIS_URL)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -43,3 +45,15 @@ services:
 
     App\Domain\Contract\Verification\VerifyUserCredentialsInterface:
         class: 'App\Application\Security\Authorization\VerifyUserCredentials'
+
+    RedisConnection:
+        class: 'Redis'
+        factory: [ 'Symfony\Component\Cache\Adapter\AbstractAdapter', 'createConnection' ]
+        arguments:
+            $dsn: '%redis.url%'
+
+    Symfony\Component\Cache\Adapter\AdapterInterface:
+        class: 'Symfony\Component\Cache\Adapter\RedisAdapter'
+        arguments:
+            $redis: '@RedisConnection'
+            $marshaller: '@App\Application\Marshaller\RedisMarshaller'

@@ -2,17 +2,17 @@
 
 namespace App\Application\Service;
 
-use App\Application\Request\Binance\CoinPriceRequest;
 use App\Application\Request\Binance\MyTradesRequest;
 use App\Domain\Entity\DTO\BinanceBalanceCoin;
+use App\Infrastructure\Persistence\Redis\Repository\CoinPriceRepository;
 use Doctrine\Common\Collections\Collection;
-use Throwable;
+use Exception;
 
 class BinanceCoinService
 {
     public function __construct(
-        private CoinPriceRequest $coinPriceRequest,
         private MyTradesRequest $myTradesRequest,
+        private CoinPriceRepository $coinPriceRepository,
     ) {
     }
 
@@ -30,9 +30,9 @@ class BinanceCoinService
         return $coins->map(function (BinanceBalanceCoin $coin) {
             try {
                 return $coin->setMarketPrice(
-                    (float)$this->coinPriceRequest->sendRequest($coin->getName())['price']
+                    (float)$this->coinPriceRepository->find($coin->getPairName())
                 );
-            } catch (Throwable) {
+            } catch (Exception) {
             }
 
             return $coin->setMarketPrice(1);
@@ -66,7 +66,7 @@ class BinanceCoinService
                 }
 
                 $coin->setFactPrice($price);
-            } catch (Throwable) {
+            } catch (Exception) {
             }
         });
     }

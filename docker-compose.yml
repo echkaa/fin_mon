@@ -27,6 +27,8 @@ services:
             - ./api:/var/www/kava_project
             - ./docker/php/php-dev.ini:/usr/local/etc/php/conf.d/php-dev.ini
         depends_on:
+            redis:
+                condition: service_started
             mysql:
                 condition: service_healthy
 

@@ -10,4 +10,10 @@ redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 await redisClient.connect();
 
-export default redisClient;
+function redisStore(key, value) {
+    redisClient.set(key, value).then(() => {
+        console.log(key + " - " + value);
+    });
+}
+
+export {redisStore}

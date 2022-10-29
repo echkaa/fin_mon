@@ -1,4 +1,4 @@
-import redisClient from "./redis.js";
+import {redisStore} from "./redis.js";
 import WebSocket from 'ws';
 
 const ws = new WebSocket('wss://stream.binance.com:9443/ws/!ticker_1h@arr');
@@ -16,9 +16,7 @@ ws.on('message', (data) => {
         const coins = JSON.parse(data); // parsing single-trade record
 
         coins.map(function (coin) {
-            redisClient.set('money-price_' + coin.s, coin.c).then(() => {
-                console.log(coin.s + " - " + coin.c);
-            });
+            redisStore('coin-price_' + coin.s, coin.c);
         });
     }
 });
