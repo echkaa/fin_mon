@@ -73,14 +73,16 @@ services:
             - "3000:3000"
 
     init:
-        build:
-            context: docker/init
+        build: ./docker/init
+        working_dir: /var/www/kava_project
         volumes:
             - ./api:/var/www/kava_project
             - ./docker/init/init.sh:/init.sh
         command: bash -c "cat /init.sh | bash"
         depends_on:
             - api
+            - mysql
+            - redis
 
     messenger:
         build:
