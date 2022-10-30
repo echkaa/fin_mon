@@ -13,11 +13,13 @@ RUN apt update -y && apt install -y --no-install-recommends \
     wget \
     libssl-dev \
     pkg-config \
-    zip
+    zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && docker-php-ext-install pdo pdo_mysql zip \
+
+RUN docker-php-ext-install pdo pdo_mysql zip \
     && docker-php-ext-install pcntl \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
@@ -28,7 +30,5 @@ RUN pecl install xdebug \
     && docker-php-ext-enable pcntl \
     && docker-php-ext-enable igbinary \
     && docker-php-ext-enable redis
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /var/www/kava_project
