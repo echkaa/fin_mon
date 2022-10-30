@@ -4,8 +4,8 @@ namespace App\Infrastructure\Persistence\MySQL\Repository;
 
 use App\Domain\Contract\Entity\EntityInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {
@@ -45,14 +45,14 @@ abstract class AbstractRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws Exception
+     * @throws EntityNotFoundException
      */
     function findByOne(int $id): ?EntityInterface
     {
         $entity = $this->find($id);
 
         if ($entity === null) {
-            throw new Exception("Not found entity by ID");
+            throw new EntityNotFoundException("Not found entity by ID");
         }
 
         return $entity;

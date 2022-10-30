@@ -14,7 +14,7 @@ class StatisticController extends AbstractController
 {
     /**
      * @Route("/v1/statistic/operation", name="statistic_operation", methods={"GET"})
-     * @OA\Post(summary="Get statistic by operation")
+     * @OA\Get(summary="Get statistic by operation")
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(
      *     @OA\MediaType(mediaType="application/json",

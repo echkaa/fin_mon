@@ -6,6 +6,7 @@
 parameters:
     binance.api_url: '%env(resolve:BINANCE_API_URL)%'
     monobank.api_url: '%env(resolve:MONOBANK_API_URL)%'
+    telegram.bot_token: '%env(resolve:TELEGRAM_BOT_TOKEN)%'
 
     redis.url: '%env(resolve:REDIS_URL)%'
 
@@ -57,3 +58,13 @@ services:
         arguments:
             $redis: '@RedisConnection'
             $marshaller: '@App\Application\Marshaller\RedisMarshaller'
+
+    TelegramBotClient:
+        class: 'TelegramBot\Api\Client'
+        arguments:
+            $token: '%telegram.bot_token%'
+
+    App\Infrastructure\Adapter\TelegramAdapter:
+        class: 'App\Infrastructure\Adapter\TelegramAdapter'
+        arguments:
+            $client: '@TelegramBotClient'

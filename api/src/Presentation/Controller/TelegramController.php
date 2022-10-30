@@ -2,30 +2,28 @@
 
 namespace App\Presentation\Controller;
 
-use App\Application\Command\User\Info\UserInfoCommand;
-use Nelmio\ApiDocBundle\Annotation\Security;
+use App\Application\Command\Telegram\Client\TelegramClientCommand;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
-class UserController extends AbstractController
+class TelegramController extends AbstractController
 {
     /**
-     * @Route("/v1/user/info", name="user_info", methods={"GET"})
-     * @OA\Get(summary="Get user info")
+     * @Route("/v1/telegram/client", name="telegram_client", methods={"POST"})
+     * @OA\Post(summary="Telegram client")
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(
      *     @OA\MediaType(mediaType="application/json",
-     *          @OA\Schema(ref=@Model(type=UserInfoCommand::class))
+     *          @OA\Schema(ref=@Model(type=TelegramClientCommand::class))
      *     )
      * )
-     * @Security(name="Bearer")
      * @throws ExceptionInterface
      */
-    public function update(): Response
+    public function setWebhook(): Response
     {
-        return $this->response($this->handle(UserInfoCommand::class));
+        return $this->response($this->handle(TelegramClientCommand::class));
     }
 }

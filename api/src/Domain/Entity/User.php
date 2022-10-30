@@ -23,6 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
     private $username;
     #[ORM\Column(type: 'string')]
     private $password;
+    #[ORM\Column(type: 'integer', name: 'telegram_chat_id')]
+    private $telegramChatId;
     #[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'user')]
     private $profile;
     #[ORM\OneToOne(targetEntity: Setting::class, mappedBy: 'user')]
@@ -124,6 +126,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
     public function getSetting(): ?Setting
     {
         return $this->setting;
+    }
+
+    public function setTelegramChatId(int $chatId): self
+    {
+        $this->telegramChatId = $chatId;
+
+        return $this;
+    }
+
+    public function getTelegramChatId(): ?int
+    {
+        return $this->telegramChatId;
     }
 
     public function jsonSerialize(): array

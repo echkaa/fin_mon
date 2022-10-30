@@ -17,6 +17,7 @@ security:
 
     access_control:
         - { path: ^/v1/auth, roles: PUBLIC_ACCESS }
+        - { path: ^/v1/telegram, roles: PUBLIC_ACCESS }
         - { path: ^/v1, roles: IS_AUTHENTICATED_FULLY }
 
     password_hashers:
