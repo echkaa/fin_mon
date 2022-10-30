@@ -23,7 +23,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
     private $username;
     #[ORM\Column(type: 'string')]
     private $password;
-    #[ORM\Column(type: 'integer', name: 'telegram_chat_id')]
+    #[ORM\Column(type: 'integer', name: 'telegram_chat_id', nullable: true)]
     private $telegramChatId;
     #[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'user')]
     private $profile;
