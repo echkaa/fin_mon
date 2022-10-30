@@ -19,7 +19,10 @@ class TelegramAdapter
 
     public function setOn(callable $callback): void
     {
-        $this->client->on($callback);
+        $this->client->on(
+            $callback,
+            fn() => true
+        );
     }
 
     public function sendMessage(int $chatId, string $message): void
