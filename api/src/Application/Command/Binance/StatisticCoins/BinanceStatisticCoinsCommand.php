@@ -16,8 +16,8 @@ class BinanceStatisticCoinsCommand extends AbstractCommand
 {
     protected ?array $coins = null;
 
-    public function getCoins(): ?array
+    public function getCoins(): array
     {
-        return $this->coins;
+        return $this->coins ?? [];
     }
 }

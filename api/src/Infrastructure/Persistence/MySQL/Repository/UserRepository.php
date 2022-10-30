@@ -16,4 +16,9 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     {
         return $this->findOneBy(['username' => $username]);
     }
+
+    public function getByTelegramChatId(int $chatId): ?User
+    {
+        return $this->findOneBy(['telegramChatId' => $chatId]);
+    }
 }

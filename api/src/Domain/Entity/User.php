@@ -128,7 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, EntityI
         return $this->setting;
     }
 
-    public function setTelegramChatId(int $chatId): self
+    public function setTelegramChatId(?int $chatId): self
     {
         $this->telegramChatId = $chatId;
 

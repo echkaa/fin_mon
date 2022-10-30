@@ -6,9 +6,9 @@ use Throwable;
 
 class BinanceBalanceCoin
 {
-    private float $factPrice;
-    private float $free;
-    private float $marketPrice;
+    private float $factPrice = 1;
+    private float $free = 0;
+    private float $marketPrice = 1;
     private string $name;
 
     public function getName(): string

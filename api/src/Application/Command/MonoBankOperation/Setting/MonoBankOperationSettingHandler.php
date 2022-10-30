@@ -39,7 +39,7 @@ class MonoBankOperationSettingHandler implements MessageHandlerInterface
             try {
                 $operations = $this->getOperationsFromMonoBank($setting);
 
-                $this->userService->setUserById($setting->getUser()->getId());
+                $this->userService->setUser($setting->getUser());
 
                 $this->saveOperations($operations);
 

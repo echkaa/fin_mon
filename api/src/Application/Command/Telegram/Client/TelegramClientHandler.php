@@ -23,7 +23,7 @@ class TelegramClientHandler implements MessageHandlerInterface
      */
     public function __invoke(TelegramClientCommand $command): ResponseInterface
     {
-        $this->telegramService->setHandlers();
+        $this->telegramService->setEvents();
 
         return new HttpResponse(
             status: Response::HTTP_OK,

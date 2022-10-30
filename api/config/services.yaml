@@ -68,3 +68,11 @@ services:
         class: 'App\Infrastructure\Adapter\TelegramAdapter'
         arguments:
             $client: '@TelegramBotClient'
+
+    App\Application\Service\TelegramService:
+        class: 'App\Application\Service\TelegramService'
+        arguments:
+            $telegramHandlers: [
+                '@App\Application\TelegramHandler\CoinStatisticHandler',
+                '@App\Application\TelegramHandler\RemoveUserRelationHandler',
+            ]

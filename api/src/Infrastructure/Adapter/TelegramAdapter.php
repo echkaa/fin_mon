@@ -4,6 +4,7 @@ namespace App\Infrastructure\Adapter;
 
 use TelegramBot\Api\Client;
 use TelegramBot\Api\InvalidJsonException;
+use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 
 class TelegramAdapter
 {
@@ -25,11 +26,15 @@ class TelegramAdapter
         );
     }
 
-    public function sendMessage(int $chatId, string $message): void
+    public function sendMessage(int $chatId, string $message, ReplyKeyboardMarkup $keyboardMarkup = null): void
     {
         $this->client->sendMessage(
             $chatId,
             $message,
+            null,
+            false,
+            null,
+            $keyboardMarkup,
         );
     }
 

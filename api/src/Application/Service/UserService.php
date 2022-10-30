@@ -39,10 +39,8 @@ class UserService
         ]);
     }
 
-    public function setUserById(int $userId): void
+    public function setUser(?User $user): void
     {
-        $this->user = $this->userRepository->findOneBy([
-            'id' => $userId,
-        ]);
+        $this->user = $user;
     }
 }
