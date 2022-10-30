@@ -65,6 +65,10 @@ export default class SettingBlock extends React.Component {
                             <a style={styles.link} target="_blank" href="https://api.monobank.ua/">Token</a>
                         </div>
 
+                        <div className="input-group">
+                            <a style={styles.link} target="_blank" href="https://t.me/finmon_kava_bot">Telegram bot</a>
+                        </div>
+
                         <button onClick={this.saveSetting}
                                 className="btn margin-around btn-primary"
                                 type="button">Save
