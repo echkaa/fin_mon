@@ -6,7 +6,6 @@ usermod --non-unique --uid 1000 www-data
 groupmod --non-unique --gid 1000 www-data
 chown -R www-data:www-data .
 
-echo | php bin/console doctrine:migrations:generate
 echo | php bin/console doctrine:migrations:diff
 echo | php bin/console doctrine:migrations:migrate
 php bin/console seed:load user
