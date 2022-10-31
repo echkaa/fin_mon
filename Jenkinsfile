@@ -9,10 +9,10 @@ pipeline {
                 '''
             }
         }
-        stage("Prune docker data") {
+        stage("Down previous") {
             steps {
                 sh '''
-                    docker system prune -a --volumes -f
+                    docker-compose down
                 '''
             }
         }
