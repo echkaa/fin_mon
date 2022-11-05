@@ -8,7 +8,9 @@ chown -R www-data:www-data .
 
 echo | php bin/console doctrine:migrations:diff
 echo | php bin/console doctrine:migrations:migrate
+
 php bin/console seed:load user
+php bin/console coin:list:fill
 
 openssl genrsa -out config/jwt/private.pem 4096
 openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem

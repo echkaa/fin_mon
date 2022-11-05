@@ -12,10 +12,12 @@ class BinanceClient
     private const ACCOUNT_URL = 'api/v3/account';
     private const MY_TRADES_URL = 'api/v3/myTrades';
     private const COIN_PRICE_URL = 'api/v3/avgPrice';
+    private const COIN_LIST_URL = 'sapi/v1/margin/allAssets';
 
     public function __construct(
         private ClientInterface $client,
         private string $binanceAPIUrl,
+        private string $binanceAPIKey,
     ) {
     }
 
@@ -57,6 +59,16 @@ class BinanceClient
     /**
      * @throws GuzzleException
      */
+    public function getCoinList(): ResponseInterface
+    {
+        return $this->requestGET(
+            url: self::COIN_LIST_URL
+        );
+    }
+
+    /**
+     * @throws GuzzleException
+     */
     private function requestWithTokenGET(string $url, BinanceToken $token): ResponseInterface
     {
         return $this->client->request(
@@ -73,11 +85,16 @@ class BinanceClient
     /**
      * @throws GuzzleException
      */
-    private function requestGET(string $url, array $params): ResponseInterface
+    private function requestGET(string $url, array $params = []): ResponseInterface
     {
         return $this->client->request(
             method: 'GET',
             uri: $this->binanceAPIUrl . $url . '?' . http_build_query($params),
+            options: [
+                'headers' => [
+                    'X-MBX-APIKEY' => $this->binanceAPIKey,
+                ],
+            ]
         );
     }
 }

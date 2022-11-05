@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     binance.api_url: '%env(resolve:BINANCE_API_URL)%'
+    binance.apikey: '%env(resolve:BINANCE_APIKEY)%'
+
     monobank.api_url: '%env(resolve:MONOBANK_API_URL)%'
     telegram.bot_token: '%env(resolve:TELEGRAM_BOT_TOKEN)%'
 
@@ -39,6 +41,7 @@ services:
     App\Infrastructure\Client\BinanceClient:
         arguments:
             $binanceAPIUrl: '%binance.api_url%'
+            $binanceAPIKey: '%binance.apikey%'
 
     App\Infrastructure\Client\MonoBankClient:
         arguments:

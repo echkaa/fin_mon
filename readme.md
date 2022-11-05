@@ -17,3 +17,6 @@
 
 > Set operations from monobank   
 > bin/console mono-bank:operations:setting
+
+> Fill coin list from Binance  
+> bin/console coin:list:fill

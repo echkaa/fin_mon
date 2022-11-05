@@ -10,7 +10,7 @@ use App\Infrastructure\Persistence\Redis\Repository\CoinPriceRepository;
 use Doctrine\Common\Collections\Collection;
 use Exception;
 
-class BinanceCoinService
+class BinanceStatisticCoinService
 {
     public function __construct(
         private MyTradesRequest $myTradesRequest,

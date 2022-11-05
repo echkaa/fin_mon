@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Binance\StatisticCoins;
 
-use App\Application\Service\BinanceCoinService;
+use App\Application\Service\BinanceStatisticCoinService;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -14,7 +14,7 @@ class BinanceStatisticCoinsHandler implements MessageHandlerInterface
 {
     public function __construct(
         private SerializerInterface $serializer,
-        private BinanceCoinService $binanceCoinService,
+        private BinanceStatisticCoinService $binanceCoinService,
     ) {
     }
 

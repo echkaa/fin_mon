@@ -2,7 +2,7 @@
 
 namespace App\Application\TelegramHandler;
 
-use App\Application\Service\BinanceCoinService;
+use App\Application\Service\BinanceStatisticCoinService;
 use App\Domain\Contract\Handler\TelegramHandlerInterface;
 use App\Domain\Entity\DTO\BinanceBalanceCoin;
 use App\Infrastructure\Adapter\TelegramAdapter;
@@ -12,7 +12,7 @@ class CoinStatisticHandler implements TelegramHandlerInterface
     const COIN_MESSAGE_SAMPLE = '%s; PNL: %d; PNL (percent): %d';
 
     public function __construct(
-        private BinanceCoinService $coinService,
+        private BinanceStatisticCoinService $coinService,
         private TelegramAdapter $adapter,
     ) {
     }
