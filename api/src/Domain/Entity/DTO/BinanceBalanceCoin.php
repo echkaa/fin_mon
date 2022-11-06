@@ -2,6 +2,8 @@
 
 namespace App\Domain\Entity\DTO;
 
+use App\Domain\Entity\Coin;
+use Doctrine\Common\Collections\ArrayCollection;
 use Throwable;
 
 class BinanceBalanceCoin
@@ -9,23 +11,27 @@ class BinanceBalanceCoin
     private float $factPrice = 1;
     private float $free = 0;
     private float $marketPrice = 1;
-    private string $name;
+    private Coin $coin;
+    /**
+     * Collection[BinanceCoinTransaction]
+     * */
+    private ?ArrayCollection $transactions;
 
-    public function getName(): string
+    public function setCoin(Coin $coin)
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+        $this->coin = $coin;
 
         return $this;
     }
 
+    public function getName(): string
+    {
+        return $this->coin->getName();
+    }
+
     public function getPairName(): string
     {
-        return $this->name . 'USDT';
+        return $this->coin->getName() . 'USDT';
     }
 
     public function getFree(): float
@@ -76,5 +82,17 @@ class BinanceBalanceCoin
         } catch (Throwable) {
             return 0;
         }
+    }
+
+    public function setTransactions(ArrayCollection $transactions): self
+    {
+        $this->transactions = $transactions;
+
+        return $this;
+    }
+
+    public function getTransactions(): ArrayCollection
+    {
+        return $this->transactions ?? new ArrayCollection();
     }
 }

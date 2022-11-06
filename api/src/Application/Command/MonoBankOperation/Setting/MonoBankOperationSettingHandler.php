@@ -32,7 +32,7 @@ class MonoBankOperationSettingHandler implements MessageHandlerInterface
 
     public function __invoke(MonoBankOperationSettingCommand $command): void
     {
-        $settingList = $this->settingRepository->getNotNullList();
+        $settingList = $this->settingRepository->getMonobankNotNullList();
 
         /** @var Setting $setting */
         foreach ($settingList as $setting) {

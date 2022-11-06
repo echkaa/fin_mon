@@ -2,7 +2,9 @@
 
 namespace App\Infrastructure\Persistence\Redis\Repository;
 
-class CoinPriceRepository extends AbstractRepository
+use App\Domain\Contract\Repository\CoinPriceRepositoryInterface;
+
+class CoinPriceRepository extends AbstractRepository implements CoinPriceRepositoryInterface
 {
     function getPrefix(): string
     {

@@ -14,7 +14,7 @@ class BinanceCoinFillService
         private CoinListRequest $coinListRequest,
         private CoinFactoryInterface $coinFactory,
         private CoinRepositoryInterface $coinRepository,
-        private AllCoinService $allCoinService,
+        private BinanceAllCoinService $allCoinService,
     ) {
     }
 

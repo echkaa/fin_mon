@@ -4,5 +4,7 @@ namespace App\Domain\Contract\Repository;
 
 interface SettingRepositoryInterface extends AbstractRepositoryInterface
 {
-    public function getNotNullList(): array;
+    public function getMonobankNotNullList(): array;
+
+    public function getBinanceKeysNotNullList(): array;
 }

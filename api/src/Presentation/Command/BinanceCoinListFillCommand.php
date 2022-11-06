@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Command;
 
-use App\Application\Command\Binance\FillCoinList\BinanceFillCoinListCommand as FillCoinListCommand;
+use App\Application\Command\Binance\FillCoinList\BinanceFillUserWalletCommand as FillCoinListCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,7 +18,7 @@ class BinanceCoinListFillCommand extends Command
 
     public static function getDefaultName(): string
     {
-        return 'coin:list:fill';
+        return 'binance:coin:list:fill';
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
