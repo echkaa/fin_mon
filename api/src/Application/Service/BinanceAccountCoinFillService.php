@@ -58,11 +58,14 @@ class BinanceAccountCoinFillService
             $transaction = $transactions->get($i);
 
             if ($transaction->getIsBuyer()) {
-                $price = ($price * $quantity + $transaction->getPrice() * $transaction->getCount(
-                        )) / ($quantity + $transaction->getCount());
+                $price = ($price * $quantity + $transaction->getMarketPrice() * $transaction->getQuantity(
+                        )) / ($quantity + $transaction->getQuantity());
             }
 
-            $quantity += $transaction->getIsBuyerInt() * $transaction->getCount();
+            $quantity += $transaction->getIsBuyerInt() * $transaction->getQuantity();
+
+            $transaction->setTotalQuantity($quantity)
+                ->setFactPrice($price);
         }
 
         return $price;
@@ -77,7 +80,7 @@ class BinanceAccountCoinFillService
             /* @var BinanceCoinTransaction $transaction */
             $transaction = $transactions->get($i);
 
-            $quantity += $transaction->getIsBuyerInt() * $transaction->getCount();
+            $quantity += $transaction->getIsBuyerInt() * $transaction->getQuantity();
 
             if ($quantity >= 0 && $quantity * $coin->getMarketPrice() <= 10) {
                 $indexStartCalc = $i + (int)$transaction->getIsBuyer();

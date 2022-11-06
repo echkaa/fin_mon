@@ -2,8 +2,7 @@
 
 namespace App\Presentation\Command;
 
-use App\Application\Command\Binance\FillCoinList\BinanceFillUserWalletCommand;
-use App\Application\Command\MonoBankOperation\Setting\MonoBankOperationSettingCommand as MonoBankSettingCommand;
+use App\Application\Command\Binance\FillUserWallet\BinanceFillUserWalletCommand;
 use App\Domain\Contract\Repository\SettingRepositoryInterface;
 use App\Domain\Entity\Setting;
 use Symfony\Component\Console\Command\Command;

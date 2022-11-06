@@ -3,11 +3,11 @@
 namespace App\Application\Service;
 
 use App\Domain\Entity\DTO\BinanceBalanceCoin;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class BinanceCoinFilterService
 {
-    public function filterCoins(Collection $coins): Collection
+    public function filterCoins(ArrayCollection $coins): ArrayCollection
     {
         return $coins->filter(
             function (BinanceBalanceCoin $coin) {
@@ -16,7 +16,7 @@ class BinanceCoinFilterService
         );
     }
 
-    public function filterCoinsByList(Collection $coins, array $coinNeedList): Collection
+    public function filterCoinsByList(ArrayCollection $coins, array $coinNeedList): ArrayCollection
     {
         return $coins->filter(
             function (BinanceBalanceCoin $coin) use ($coinNeedList) {

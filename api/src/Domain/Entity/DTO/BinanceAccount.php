@@ -2,15 +2,15 @@
 
 namespace App\Domain\Entity\DTO;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class BinanceAccount
 {
     private string $accountType;
     /**
-     * Collection[BinanceBalanceCoin]
+     * ArrayCollection[BinanceBalanceCoin]
      * */
-    private Collection $balanceCoins;
+    private ArrayCollection $balanceCoins;
     private bool $canDeposit;
     private bool $canTrade;
     private bool $canWithdraw;
@@ -43,12 +43,12 @@ class BinanceAccount
         return $this;
     }
 
-    public function getBalanceCoins(): Collection
+    public function getBalanceCoins(): ArrayCollection
     {
         return $this->balanceCoins;
     }
 
-    public function setBalanceCoins(Collection $balanceCoins): self
+    public function setBalanceCoins(ArrayCollection $balanceCoins): self
     {
         $this->balanceCoins = $balanceCoins;
 

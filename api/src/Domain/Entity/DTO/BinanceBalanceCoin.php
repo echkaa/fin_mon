@@ -24,6 +24,11 @@ class BinanceBalanceCoin
         return $this;
     }
 
+    public function getCoin(): Coin
+    {
+        return $this->coin;
+    }
+
     public function getName(): string
     {
         return $this->coin->getName();

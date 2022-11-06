@@ -24,9 +24,10 @@ class BinanceTransactionFactory
     private function getTransactionFromBinanceTrade(array $trade): BinanceCoinTransaction
     {
         return (new BinanceCoinTransaction())
-            ->setCount((float)$trade['qty'])
-            ->setPrice((float)$trade['price'])
+            ->setQuantity((float)$trade['qty'])
+            ->setMarketPrice((float)$trade['price'])
             ->setTime($trade['time'])
-            ->setIsBuyer($trade['isBuyer']);
+            ->setIsBuyer($trade['isBuyer'])
+            ->setId($trade['id']);
     }
 }
