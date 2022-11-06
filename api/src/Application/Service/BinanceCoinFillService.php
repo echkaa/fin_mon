@@ -14,6 +14,7 @@ class BinanceCoinFillService
         private CoinListRequest $coinListRequest,
         private CoinFactoryInterface $coinFactory,
         private CoinRepositoryInterface $coinRepository,
+        private AllCoinService $allCoinService,
     ) {
     }
 
@@ -30,7 +31,7 @@ class BinanceCoinFillService
 
                 $this->checkOnExist($coinEntity);
 
-                $this->insertCoin($coinEntity);
+                $this->coinRepository->store($coin);
             } catch (EntityExistException) {
             }
         }
@@ -41,15 +42,10 @@ class BinanceCoinFillService
      * */
     private function checkOnExist(Coin $coin): void
     {
-        $coin = $this->coinRepository->findBy(['name' => $coin->getName()]);
+        $coin = $this->allCoinService->getCoinByName($coin->getName());
 
         if ($coin) {
             throw new EntityExistException();
         }
-    }
-
-    private function insertCoin(Coin $coin): void
-    {
-        $this->coinRepository->store($coin);
     }
 }
