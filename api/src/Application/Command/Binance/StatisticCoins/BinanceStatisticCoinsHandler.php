@@ -2,9 +2,7 @@
 
 namespace App\Application\Command\Binance\StatisticCoins;
 
-use App\Application\Service\BinanceAccountBuilderService;
-use App\Application\Service\BinanceAccountCoinFillService;
-use App\Application\Service\BinanceCoinFilterService;
+use App\Application\Service\TransactionService;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -16,9 +14,7 @@ class BinanceStatisticCoinsHandler implements MessageHandlerInterface
 {
     public function __construct(
         private SerializerInterface $serializer,
-        private BinanceAccountBuilderService $accountBuilderService,
-        private BinanceAccountCoinFillService $coinFillService,
-        private BinanceCoinFilterService $coinFilterService,
+        private TransactionService $transactionService,
     ) {
     }
 
@@ -27,22 +23,14 @@ class BinanceStatisticCoinsHandler implements MessageHandlerInterface
      */
     public function __invoke(BinanceStatisticCoinsCommand $command): ResponseInterface
     {
-        $account = $this->accountBuilderService->getAccount();
-        $this->accountBuilderService->setTransactionByAccount($account);
+        $transactions = $this->transactionService->getLastTransactionsForCurrentUser();
 
-        $account->setBalanceCoins(
-            $this->coinFilterService->filterCoinsByList(
-                coins: $account->getBalanceCoins(),
-                coinNeedList: $command->getCoins(),
-            )
-        );
-
-        $this->coinFillService->fillFullStatCoinsByAccount($account);
+        $this->transactionService->updateMarketPriceOnTransactions($transactions);
 
         return new HttpResponse(
             status: Response::HTTP_OK,
             body: $this->serializer->serialize(
-                data: $this->coinFilterService->filterCoins($account->getBalanceCoins()),
+                data: $this->transactionService->filterTransactionsByValue($transactions),
                 format: 'json',
             )
         );

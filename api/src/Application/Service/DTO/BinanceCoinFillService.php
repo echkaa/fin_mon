@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Application\Service;
+namespace App\Application\Service\DTO;
 
 use App\Application\Request\Binance\CoinListRequest;
+use App\Application\Service\CoinService;
 use App\Domain\Contract\Factory\CoinFactoryInterface;
 use App\Domain\Contract\Repository\CoinRepositoryInterface;
 use App\Domain\Entity\Coin;
@@ -14,7 +15,7 @@ class BinanceCoinFillService
         private CoinListRequest $coinListRequest,
         private CoinFactoryInterface $coinFactory,
         private CoinRepositoryInterface $coinRepository,
-        private BinanceAllCoinService $allCoinService,
+        private CoinService $coinService,
     ) {
     }
 
@@ -42,7 +43,7 @@ class BinanceCoinFillService
      * */
     private function checkOnExist(Coin $coin): void
     {
-        $coin = $this->allCoinService->getCoinByName($coin->getName());
+        $coin = $this->coinService->getCoinByName($coin->getName());
 
         if ($coin) {
             throw new EntityExistException();

@@ -36,7 +36,7 @@ class BinanceBalanceCoin
 
     public function getPairName(): string
     {
-        return $this->coin->getName() . 'USDT';
+        return $this->coin->getPairName();
     }
 
     public function getFree(): float

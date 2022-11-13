@@ -2,11 +2,9 @@
 
 namespace App\Application\TelegramHandler;
 
-use App\Application\Service\BinanceAccountBuilderService;
-use App\Application\Service\BinanceAccountCoinFillService;
-use App\Application\Service\BinanceCoinFilterService;
+use App\Application\Service\TransactionService;
 use App\Domain\Contract\Handler\TelegramHandlerInterface;
-use App\Domain\Entity\DTO\BinanceBalanceCoin;
+use App\Domain\Entity\Transaction;
 use App\Infrastructure\Adapter\TelegramAdapter;
 
 class CoinStatisticHandler implements TelegramHandlerInterface
@@ -15,9 +13,7 @@ class CoinStatisticHandler implements TelegramHandlerInterface
 
     public function __construct(
         private TelegramAdapter $adapter,
-        private BinanceAccountBuilderService $accountBuilderService,
-        private BinanceAccountCoinFillService $coinFillService,
-        private BinanceCoinFilterService $coinFilterService,
+        private TransactionService $transactionService,
     ) {
     }
 
@@ -28,30 +24,28 @@ class CoinStatisticHandler implements TelegramHandlerInterface
 
     public function execute(int $telegramChatId): void
     {
-        $account = $this->accountBuilderService->getAccount();
-        $this->accountBuilderService->setTransactionByAccount($account);
+        $transactions = $this->transactionService->getLastTransactionsForCurrentUser();
 
-        $this->coinFillService->fillFullStatCoinsByAccount($account);
+        $this->transactionService->updateMarketPriceOnTransactions($transactions);
 
-        $this->coinFilterService
-            ->filterCoins($account->getBalanceCoins())
+        $this->transactionService->filterTransactionsByValue($transactions)
             ->map(
-                function (BinanceBalanceCoin $coin) use ($telegramChatId) {
+                function (Transaction $transaction) use ($telegramChatId) {
                     $this->adapter->sendMessage(
                         $telegramChatId,
-                        $this->buildMessage($coin),
+                        $this->buildMessage($transaction),
                     );
                 }
             );
     }
 
-    private function buildMessage(BinanceBalanceCoin $coin)
+    private function buildMessage(Transaction $transaction)
     {
         return sprintf(
             self::COIN_MESSAGE_SAMPLE,
-            $coin->getName(),
-            $coin->getPNL(),
-            $coin->getPNLPercent(),
+            $transaction->getCoin()->getName(),
+            $transaction->getPNL(),
+            $transaction->getPNLPercent(),
         );
     }
 }

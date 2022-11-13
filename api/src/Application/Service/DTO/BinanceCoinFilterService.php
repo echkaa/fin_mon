@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Service;
+namespace App\Application\Service\DTO;
 
 use App\Domain\Entity\DTO\BinanceBalanceCoin;
 use Doctrine\Common\Collections\ArrayCollection;

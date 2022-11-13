@@ -8,16 +8,16 @@ use Exception;
 class BinanceCoinTransaction
 {
     private float $quantity;
-    private float $totalQuantity;
+    private float $totalQuantity = 0;
     private bool $isBuyer;
     private float $marketPrice;
-    private float $factPrice;
+    private float $factPrice = 0;
     private int $time;
     private int $id;
 
     public function setTime(int $time): self
     {
-        $this->time = (int)($time / 1000);
+        $this->time = $time;
 
         return $this;
     }
@@ -72,7 +72,7 @@ class BinanceCoinTransaction
 
     public function setTotalQuantity(float $totalQuantity): self
     {
-        $this->totalQuantity = $totalQuantity;
+        $this->totalQuantity = $totalQuantity >= 0 ? $totalQuantity : 0;
 
         return $this;
     }

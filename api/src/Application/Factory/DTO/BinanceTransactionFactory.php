@@ -3,6 +3,7 @@
 namespace App\Application\Factory\DTO;
 
 use App\Domain\Entity\DTO\BinanceCoinTransaction;
+use App\Domain\Entity\Transaction;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BinanceTransactionFactory
@@ -26,8 +27,19 @@ class BinanceTransactionFactory
         return (new BinanceCoinTransaction())
             ->setQuantity((float)$trade['qty'])
             ->setMarketPrice((float)$trade['price'])
-            ->setTime($trade['time'])
+            ->setTime((int)($trade['time'] / 1000))
             ->setIsBuyer($trade['isBuyer'])
             ->setId($trade['id']);
+    }
+
+    public function getBinanceTransactionFromTransaction(Transaction $transaction): BinanceCoinTransaction
+    {
+        return (new BinanceCoinTransaction())
+            ->setQuantity($transaction->getQuantity())
+            ->setTotalQuantity($transaction->getTotalQuantity())
+            ->setMarketPrice($transaction->getMarketPrice())
+            ->setTime($transaction->getDate()->format('U'))
+            ->setIsBuyer($transaction->getIsBuyer())
+            ->setId($transaction->getSourceId());
     }
 }

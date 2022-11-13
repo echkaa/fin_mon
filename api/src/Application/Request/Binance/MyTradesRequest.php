@@ -9,12 +9,13 @@ class MyTradesRequest extends AbstractBinanceRequest
     /**
      * @throws GuzzleException
      */
-    public function sendRequest(string $symbol): array
+    public function sendRequest(string $symbol, ?int $fromId = null): array
     {
         $response = $this->binanceClient->getMyTrades(
             $this->getRequestToken(
                 [
                     'symbol' => $symbol,
+                    'fromId' => $fromId,
                 ],
             ),
         );

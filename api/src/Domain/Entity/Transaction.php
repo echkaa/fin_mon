@@ -6,13 +6,15 @@ use App\Domain\Contract\Entity\EntityInterface;
 use App\Infrastructure\Persistence\MySQL\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use JsonSerializable;
+use Throwable;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Transaction implements EntityInterface
+class Transaction implements EntityInterface, JsonSerializable
 {
     public const BINANCE_SOURCE = 'binance';
-    #[ORM\ManyToOne(targetEntity: Coin::class, inversedBy: 'transaction')]
+    #[ORM\ManyToOne(targetEntity: Coin::class, inversedBy: 'transactions')]
     #[ORM\JoinColumn(name: 'coin_id', referencedColumnName: 'id', nullable: false)]
     private $coin;
     #[ORM\Column(type: 'datetime')]
@@ -29,7 +31,7 @@ class Transaction implements EntityInterface
     private $marketPrice;
     #[ORM\Column(type: 'float')]
     private $quantity;
-    #[ORM\ManyToOne(targetEntity: Setting::class, inversedBy: 'transaction')]
+    #[ORM\ManyToOne(targetEntity: Setting::class, inversedBy: 'transactions')]
     #[ORM\JoinColumn(name: 'setting_id', referencedColumnName: 'id', nullable: true)]
     private $setting;
     #[ORM\Column(type: 'string')]
@@ -51,6 +53,11 @@ class Transaction implements EntityInterface
         $this->coin = $coin;
 
         return $this;
+    }
+
+    public function getCoin(): Coin
+    {
+        return $this->coin;
     }
 
     public function setFactPrice(float $factPrice): self
@@ -112,5 +119,64 @@ class Transaction implements EntityInterface
         $this->sourceId = $sourceId;
 
         return $this;
+    }
+
+    public function getFactPrice(): float
+    {
+        return $this->factPrice;
+    }
+
+    public function getMarketPrice(): float
+    {
+        return $this->marketPrice;
+    }
+
+    public function getQuantity(): float
+    {
+        return $this->quantity;
+    }
+
+    public function getTotalQuantity(): float
+    {
+        return $this->totalQuantity;
+    }
+
+    public function getIsBuyer(): bool
+    {
+        return $this->isBuyer;
+    }
+
+    public function getSourceId(): int
+    {
+        return $this->sourceId;
+    }
+
+    public function getPNL(): float
+    {
+        return round(($this->marketPrice - $this->factPrice) * $this->quantity, 2);
+    }
+
+    public function getPNLPercent(): float
+    {
+        try {
+            return round(($this->marketPrice * 100 / $this->factPrice) - 100, 2);
+        } catch (Throwable) {
+            return 0;
+        }
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'factPrice' => $this->getFactPrice(),
+            'marketPrice' => $this->getMarketPrice(),
+            'quantity' => $this->getQuantity(),
+            'totalQuantity' => $this->getTotalQuantity(),
+            'pnl' => $this->getPNL(),
+            'pnlPercent' => $this->getPNLPercent(),
+            'isBuyer' => $this->getIsBuyer(),
+            'date' => $this->getDate(),
+            'coin' => $this->getCoin(),
+        ];
     }
 }

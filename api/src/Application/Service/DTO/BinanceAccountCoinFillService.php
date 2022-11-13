@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Service;
+namespace App\Application\Service\DTO;
 
-use App\Domain\Contract\Repository\CoinPriceRepositoryInterface;
+use App\Domain\Contract\Repository\SpotCoinPriceRepositoryInterface;
 use App\Domain\Entity\DTO\BinanceAccount;
 use App\Domain\Entity\DTO\BinanceBalanceCoin;
 use App\Domain\Entity\DTO\BinanceCoinTransaction;
@@ -12,11 +12,11 @@ use Exception;
 class BinanceAccountCoinFillService
 {
     public function __construct(
-        private CoinPriceRepositoryInterface $coinPriceRepository
+        private SpotCoinPriceRepositoryInterface $coinPriceRepository
     ) {
     }
 
-    public function fillFullStatCoinsByAccount(BinanceAccount $account)
+    public function fillFullStatCoinsByAccount(BinanceAccount $account): void
     {
         $this->fillMarketPrice($account->getBalanceCoins());
         $this->fillRealPrice($account->getBalanceCoins());
@@ -75,6 +75,11 @@ class BinanceAccountCoinFillService
     {
         $transactions = $coin->getTransactions();
         $indexStartCalc = $quantity = 0;
+
+        if ($transactions->first() instanceof BinanceCoinTransaction
+            && $transactions->first()->getTotalQuantity() > 0) {
+            return $indexStartCalc;
+        }
 
         for ($i = $transactions->count() - 1; $i >= 0; $i--) {
             /* @var BinanceCoinTransaction $transaction */

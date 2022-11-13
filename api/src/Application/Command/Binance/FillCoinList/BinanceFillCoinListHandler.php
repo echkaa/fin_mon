@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\Binance\FillCoinList;
 
-use App\Application\Service\BinanceCoinFillService;
+use App\Application\Service\DTO\BinanceCoinFillService;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;
 use Psr\Http\Message\ResponseInterface;

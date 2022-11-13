@@ -16,7 +16,7 @@ ws.on('message', (data) => {
         const coins = JSON.parse(data); // parsing single-trade record
 
         coins.map(function (coin) {
-            redisStore('coin-price_' + coin.s, coin.c);
+            redisStore('spot_coin-price_' + coin.s, coin.c);
         });
     }
 });

@@ -2,9 +2,9 @@
 
 namespace App\Application\Command\Binance\FillUserWallet;
 
-use App\Application\Service\BinanceAccountBuilderService;
-use App\Application\Service\BinanceAccountCoinFillService;
-use App\Application\Service\BinanceCoinFilterService;
+use App\Application\Service\DTO\BinanceAccountBuilderService;
+use App\Application\Service\DTO\BinanceAccountCoinFillService;
+use App\Application\Service\DTO\BinanceCoinFilterService;
 use App\Application\Service\TransactionService;
 use App\Application\Service\UserService;
 use App\Infrastructure\Persistence\MySQL\Repository\UserRepository;

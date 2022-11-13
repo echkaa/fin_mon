@@ -37,7 +37,7 @@ services:
     # MySQL Service
     mysql:
         image: mysql/mysql-server:8.0
-        command: --default-authentication-plugin=mysql_native_password
+        command: --default-authentication-plugin=mysql_native_password --sql_mode=""
         environment:
             MYSQL_USER: "kava"
             MYSQL_PASSWORD: "1234"

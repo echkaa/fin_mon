@@ -6,7 +6,7 @@ use App\Domain\Contract\Repository\CoinRepositoryInterface;
 use App\Domain\Entity\Coin;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class BinanceAllCoinService
+class CoinService
 {
     private ?ArrayCollection $coinList = null;
 

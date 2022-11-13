@@ -24,11 +24,21 @@ class Coin implements EntityInterface
         return $this->name;
     }
 
+    public function getPairName(): string
+    {
+        return $this->name . 'USDT';
+    }
+
     public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
     }
 
     public function setFullName(?string $fullName): self
