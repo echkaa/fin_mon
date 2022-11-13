@@ -37,21 +37,17 @@ export default class StatisticByCoinBlock extends React.Component {
         return (
             <div style={styles.coinContainer}>
                 {this.state.coins.map((coin, index) => {
-                    if (coin.factPrice === undefined) {
-                        return;
-                    }
-
                     return (
-                        <div key={index} style={styles.coinBlock} className={coin.pNL > 0 ? 'plus_pnl' : 'minus_pnl'}>
+                        <div key={index} style={styles.coinBlock} className={coin.pnl > 0 ? 'plus_pnl' : 'minus_pnl'}>
                             <div style={{
                                 color: "rgb(23,72,8)",
                                 fontWeight: 'bold'
-                            }}>{coin.name}</div>
+                            }}>{coin.coin.name}</div>
 
                             <div>Market price: <span>{coin.marketPrice}</span></div>
                             <div>Fact price: <span>{coin.factPrice}</span></div>
-                            <div>PNL: <span>{coin.pNL}</span></div>
-                            <div>PNL percent: <span>{coin.pNLPercent}</span></div>
+                            <div>PNL: <span>{coin.pnl}</span></div>
+                            <div>PNL percent: <span>{coin.pnlPercent}</span></div>
                         </div>
                     );
                 })}
