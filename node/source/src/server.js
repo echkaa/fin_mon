@@ -1,22 +1,38 @@
 import {redisStore} from "./redis.js";
-import WebSocket from 'ws';
+import {spotWS} from "./spotPriceWS.js";
 
-const ws = new WebSocket('wss://stream.binance.com:9443/ws/!ticker_1h@arr');
+function writingSpotPrice() {
+    var skipCount = 1;
 
-ws.on('ping', (e) => {
-    ws.pong();
-});
+    spotWS.on('message', (data) => {
+        if (data && ++skipCount === 5) {
+            skipCount = 0;
 
-var skipCount = 1;
+            const coins = JSON.parse(data); // parsing single-trade record
 
-ws.on('message', (data) => {
-    if (data && ++skipCount === 5) {
-        skipCount = 0;
+            coins.map(function (coin) {
+                redisStore('spot_coin-price_' + coin.s, coin.c);
+            });
+        }
+    });
+}
 
-        const coins = JSON.parse(data); // parsing single-trade record
+function writingFuturesPrice() {
+    var skipCount = 1;
 
-        coins.map(function (coin) {
-            redisStore('spot_coin-price_' + coin.s, coin.c);
-        });
-    }
-});
+    spotWS.on('message', (data) => {
+        if (data && ++skipCount === 5) {
+            skipCount = 0;
+
+            const coins = JSON.parse(data); // parsing single-trade record
+
+            coins.map(function (coin) {
+                redisStore('futures_coin-price_' + coin.s, coin.c);
+            });
+        }
+    });
+}
+
+
+writingSpotPrice();
+writingFuturesPrice();
