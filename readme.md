@@ -21,5 +21,5 @@
 > Fill coin list from Binance  
 > bin/console binance:coin:list:fill
 
-> Fill transactions user from Binance
+> Fill transactions user from Binance   
 > bin/console binance:fill:user:wallet

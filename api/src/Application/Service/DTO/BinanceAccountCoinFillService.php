@@ -27,12 +27,11 @@ class BinanceAccountCoinFillService
     {
         return $coins->map(function (BinanceBalanceCoin $coin) {
             try {
-                return $coin->setMarketPrice(
-                    (float)$this->coinPriceRepository->find($coin->getPairName())
-                );
+                $price = (float)$this->coinPriceRepository->find($coin->getPairName());
             } catch (Exception) {
-                return $coin->setMarketPrice(1);
             }
+
+            return $coin->setMarketPrice($price ?? 1);
         });
     }
 
@@ -62,7 +61,7 @@ class BinanceAccountCoinFillService
                 }
 
                 $quantity += $transaction->getIsBuyerInt() * $transaction->getQuantity();
-                $quantity = $quantity < 0 ? 0 : $quantity;
+                $quantity = max($quantity, 0);
 
                 $transaction->setTotalQuantity($quantity)
                     ->setFactPrice($price);
