@@ -72,7 +72,7 @@ class BinanceCoinTransaction
 
     public function setTotalQuantity(float $totalQuantity): self
     {
-        $this->totalQuantity = $totalQuantity >= 0 ? $totalQuantity : 0;
+        $this->totalQuantity = $totalQuantity;
 
         return $this;
     }

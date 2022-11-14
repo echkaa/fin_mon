@@ -19,17 +19,17 @@ class Transaction implements EntityInterface, JsonSerializable
     private $coin;
     #[ORM\Column(type: 'datetime')]
     private $date;
-    #[ORM\Column(type: 'float', name: 'fact_price')]
+    #[ORM\Column(type: 'decimal', name: 'fact_price', precision: 12, scale: 8)]
     private $factPrice;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-    #[ORM\Column(type: 'boolean', name: 'is_buyer')]
+    #[ORM\Column(type: 'boolean', name: 'is_buyer', precision: 12, scale: 8)]
     private $isBuyer;
-    #[ORM\Column(type: 'float', name: 'market_price')]
+    #[ORM\Column(type: 'decimal', name: 'market_price', precision: 12, scale: 8)]
     private $marketPrice;
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'decimal', precision: 14, scale: 8)]
     private $quantity;
     #[ORM\ManyToOne(targetEntity: Setting::class, inversedBy: 'transactions')]
     #[ORM\JoinColumn(name: 'setting_id', referencedColumnName: 'id', nullable: true)]
@@ -38,7 +38,7 @@ class Transaction implements EntityInterface, JsonSerializable
     private $source;
     #[ORM\Column(type: 'integer', name: 'source_id', nullable: true)]
     private $sourceId;
-    #[ORM\Column(type: 'float', name: 'total_quantity')]
+    #[ORM\Column(type: 'decimal', name: 'total_quantity', precision: 12, scale: 8)]
     private $totalQuantity;
 
     public function setSetting(Setting $setting): self
