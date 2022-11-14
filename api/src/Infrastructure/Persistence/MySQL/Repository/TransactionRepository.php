@@ -42,9 +42,17 @@ class TransactionRepository extends AbstractRepository implements TransactionRep
     public function getLastTransactionByUser(User $user): ArrayCollection
     {
         $result = $this->createQueryBuilder('t')
+            ->select('t')
+            ->leftJoin(
+                'App\Domain\Entity\Transaction',
+                'tt',
+                'WITH',
+                't.coin = tt.coin AND t.id < tt.id'
+            )
             ->leftJoin('t.coin', 'c')
             ->leftJoin('t.setting', 's')
             ->where('s.user = :user')
+            ->andWhere('tt.id is null')
             ->setParameter('user', $user)
             ->groupBy('t.coin')
             ->orderBy('t.id', 'DESC')

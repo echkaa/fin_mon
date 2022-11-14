@@ -54,7 +54,7 @@ class BinanceAccountCoinFillService
         $transactions = new ArrayCollection($coin->getTransactions()->slice($indexStartCalc));
 
         $transactions->map(
-            function ($transaction) use ($price, $quantity) {
+            function (BinanceCoinTransaction $transaction) use (&$price, &$quantity) {
                 if ($transaction->getIsBuyer()) {
                     $price = ($price * $quantity + $transaction->getMarketPrice() * $transaction->getQuantity(
                             )) / ($quantity + $transaction->getQuantity());
@@ -63,10 +63,16 @@ class BinanceAccountCoinFillService
                 $quantity += $transaction->getIsBuyerInt() * $transaction->getQuantity();
                 $quantity = max($quantity, 0);
 
-                $transaction->setTotalQuantity($quantity)
+                return $transaction->setTotalQuantity($quantity)
                     ->setFactPrice($price);
             }
         );
+
+        if ($transactions->last()) {
+            $transactions->last()->setTotalQuantity(
+                $coin->getFree()
+            );
+        }
 
         $coin->setTransactions($transactions);
 

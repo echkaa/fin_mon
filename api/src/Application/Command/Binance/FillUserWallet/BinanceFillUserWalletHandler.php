@@ -4,7 +4,6 @@ namespace App\Application\Command\Binance\FillUserWallet;
 
 use App\Application\Service\DTO\BinanceAccountBuilderService;
 use App\Application\Service\DTO\BinanceAccountCoinFillService;
-use App\Application\Service\DTO\BinanceCoinFilterService;
 use App\Application\Service\TransactionService;
 use App\Application\Service\UserService;
 use App\Infrastructure\Persistence\MySQL\Repository\UserRepository;
@@ -23,7 +22,6 @@ class BinanceFillUserWalletHandler implements MessageHandlerInterface
         private UserRepository $userRepository,
         private BinanceAccountBuilderService $accountBuilderService,
         private BinanceAccountCoinFillService $coinFillService,
-        private BinanceCoinFilterService $coinFilterService,
         private TransactionService $transactionService,
     ) {
     }
@@ -42,9 +40,7 @@ class BinanceFillUserWalletHandler implements MessageHandlerInterface
 
         $this->coinFillService->fillFullStatCoinsByAccount($account);
 
-        $this->transactionService->fillFromBinanceBalanceCoinCollection(
-            $this->coinFilterService->filterCoins($account->getBalanceCoins())
-        );
+        $this->transactionService->fillFromBinanceBalanceCoinCollection($account->getBalanceCoins());
 
         return new HttpResponse(
             status: Response::HTTP_OK,
