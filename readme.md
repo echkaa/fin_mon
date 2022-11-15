@@ -23,3 +23,9 @@
 
 > Fill transactions user from Binance   
 > bin/console binance:fill:user:wallet
+
+> Fill futures coin price from Binance  
+> bin/console binance:fill:futures:coin_price
+
+> Clear old futures coin price from Binance  
+> bin/console binance:clear_old:futures:coin_price
