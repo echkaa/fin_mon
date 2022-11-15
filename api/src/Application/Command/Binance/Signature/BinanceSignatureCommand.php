@@ -3,6 +3,7 @@
 namespace App\Application\Command\Binance\Signature;
 
 use App\Application\Command\AbstractCommand;
+use App\Domain\Contract\Command\AsyncCommandInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -14,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *     }
  * )
  */
-class BinanceSignatureCommand extends AbstractCommand
+class BinanceSignatureCommand extends AbstractCommand implements AsyncCommandInterface
 {
     protected string $params;
 

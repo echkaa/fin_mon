@@ -3,8 +3,9 @@
 namespace App\Application\Command\Binance\FillUserWallet;
 
 use App\Application\Command\AbstractCommand;
+use App\Domain\Contract\Command\AsyncCommandInterface;
 
-class BinanceFillUserWalletCommand extends AbstractCommand
+class BinanceFillUserWalletCommand extends AbstractCommand implements AsyncCommandInterface
 {
     private int $userId;
 

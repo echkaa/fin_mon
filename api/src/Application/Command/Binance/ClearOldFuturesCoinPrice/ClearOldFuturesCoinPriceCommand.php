@@ -3,9 +3,10 @@
 namespace App\Application\Command\Binance\ClearOldFuturesCoinPrice;
 
 use App\Application\Command\AbstractCommand;
+use App\Domain\Contract\Command\AsyncCommandInterface;
 use DateTime;
 
-class ClearOldFuturesCoinPriceCommand extends AbstractCommand
+class ClearOldFuturesCoinPriceCommand extends AbstractCommand implements AsyncCommandInterface
 {
     private DateTime $deletedTo;
 

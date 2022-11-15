@@ -3,6 +3,7 @@
 namespace App\Application\Command\Binance\StatisticCoins;
 
 use App\Application\Command\AbstractCommand;
+use App\Domain\Contract\Command\AsyncCommandInterface;
 use OpenApi\Annotations as OA;
 
 /**
@@ -12,7 +13,7 @@ use OpenApi\Annotations as OA;
  *     }
  * )
  */
-class BinanceStatisticCoinsCommand extends AbstractCommand
+class BinanceStatisticCoinsCommand extends AbstractCommand implements AsyncCommandInterface
 {
     protected ?array $coins = null;
 
