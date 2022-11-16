@@ -6,7 +6,9 @@ use App\Domain\Entity\User;
 
 interface UserRepositoryInterface extends AbstractRepositoryInterface
 {
-    function getByUsername(string $username): ?User;
+    public function getByUsername(string $username): ?User;
 
-    function getByTelegramChatId(int $chatId): ?User;
+    public function getByTelegramChatId(int $chatId): ?User;
+
+    public function getTelegramChatIdNotNullList(): array;
 }

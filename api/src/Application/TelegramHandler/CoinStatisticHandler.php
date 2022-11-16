@@ -9,7 +9,7 @@ use App\Infrastructure\Adapter\TelegramAdapter;
 
 class CoinStatisticHandler implements TelegramHandlerInterface
 {
-    const COIN_MESSAGE_SAMPLE = '%s; PNL: %d; PNL (percent): %d';
+    const COIN_MESSAGE_SAMPLE = "%s\r\nPNL: %d\r\nPNL (percent): %d";
 
     public function __construct(
         private TelegramAdapter $adapter,

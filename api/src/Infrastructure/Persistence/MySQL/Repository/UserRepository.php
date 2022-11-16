@@ -21,4 +21,12 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     {
         return $this->findOneBy(['telegramChatId' => $chatId]);
     }
+
+    public function getTelegramChatIdNotNullList(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.telegramChatId is not null')
+            ->getQuery()
+            ->getResult();
+    }
 }

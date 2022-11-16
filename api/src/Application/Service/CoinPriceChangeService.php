@@ -3,7 +3,6 @@
 namespace App\Application\Service;
 
 use App\Domain\Contract\Factory\CoinPriceChangeFactoryInterface;
-use App\Domain\Contract\Factory\CoinPriceFactoryInterface;
 use App\Domain\Contract\Repository\CoinPriceChangeRepositoryInterface;
 use App\Domain\Contract\Repository\CoinRepositoryInterface;
 use App\Domain\Contract\Repository\FuturesCoinPriceRepositoryInterface;
@@ -46,7 +45,7 @@ class CoinPriceChangeService
         );
     }
 
-    private function getLastCoinPriceChangeByTimeRange(string $timeRange): ArrayCollection
+    public function getLastCoinPriceChangeByTimeRange(string $timeRange): ArrayCollection
     {
         $oldCoinPriceChanges = new ArrayCollection();
 

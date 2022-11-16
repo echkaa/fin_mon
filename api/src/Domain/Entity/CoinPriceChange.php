@@ -19,7 +19,7 @@ class CoinPriceChange implements EntityInterface, JsonSerializable
     public const RANGE_FIVE_MIN = '5m';
     public const RANGE_TEN_MIN = '10m';
     public const RANGE_FIFTEEN_MIN = '15m';
-    public const RANGE_TO_PERCENT = [
+    private const RANGE_TO_PERCENT = [
         self::RANGE_MIN => 2,
         self::RANGE_TWO_MIN => 3,
         self::RANGE_FIVE_MIN => 5,
@@ -132,10 +132,25 @@ class CoinPriceChange implements EntityInterface, JsonSerializable
         return $this;
     }
 
+    public function getTimeRange(): string
+    {
+        return $this->timeRange;
+    }
+
+    public function getReactionPercent(): int
+    {
+        return self::RANGE_TO_PERCENT[$this->getTimeRange()] ?? 10;
+    }
+
     public function setChangePercent(float $changePercent): self
     {
         $this->changePercent = $changePercent;
 
         return $this;
+    }
+
+    public function getChangePercent(): float
+    {
+        return $this->changePercent;
     }
 }
