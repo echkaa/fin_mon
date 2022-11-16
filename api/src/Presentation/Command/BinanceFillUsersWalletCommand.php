@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Command;
 
-use App\Application\Command\Binance\FillUserWallet\BinanceFillUserWalletCommand;
+use App\Application\Command\Binance\FillUserWallet\FillUserWalletCommand;
 use App\Domain\Contract\Repository\SettingRepositoryInterface;
 use App\Domain\Entity\Setting;
 use Symfony\Component\Console\Command\Command;
@@ -31,7 +31,7 @@ class BinanceFillUsersWalletCommand extends Command
         /* @var Setting $settings */
         foreach ($settings as $setting) {
             $this->messageBus->dispatch(
-                (new BinanceFillUserWalletCommand())
+                (new FillUserWalletCommand())
                     ->setUserId($setting->getUser()->getId())
             );
         }

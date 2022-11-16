@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *     }
  * )
  */
-class SettingUpdateCommand extends AbstractCommand
+class UpdateCommand extends AbstractCommand
 {
     /**
      * @SerializedName("binance_public_key")

@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Controller;
 
-use App\Application\Command\Setting\Update\SettingUpdateCommand;
+use App\Application\Command\Setting\Update\UpdateCommand;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +26,6 @@ class SettingController extends AbstractController
      */
     public function update(): Response
     {
-        return $this->response($this->handle(SettingUpdateCommand::class));
+        return $this->response($this->handle(UpdateCommand::class));
     }
 }

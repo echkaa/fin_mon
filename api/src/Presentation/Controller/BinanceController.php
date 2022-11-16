@@ -2,8 +2,8 @@
 
 namespace App\Presentation\Controller;
 
-use App\Application\Command\Binance\Signature\BinanceSignatureCommand;
-use App\Application\Command\Binance\StatisticCoins\BinanceStatisticCoinsCommand;
+use App\Application\Command\Binance\Signature\SignatureCommand;
+use App\Application\Command\Binance\StatisticCoins\StatisticCoinsCommand;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use OpenApi\Annotations as OA;
@@ -21,7 +21,7 @@ class BinanceController extends AbstractController
      */
     public function signature(): Response
     {
-        return $this->response($this->handle(BinanceSignatureCommand::class));
+        return $this->response($this->handle(SignatureCommand::class));
     }
 
     /**
@@ -33,6 +33,6 @@ class BinanceController extends AbstractController
      */
     public function statisticCoins(): Response
     {
-        return $this->response($this->handle(BinanceStatisticCoinsCommand::class));
+        return $this->response($this->handle(StatisticCoinsCommand::class));
     }
 }

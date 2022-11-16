@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Controller;
 
-use App\Application\Command\Statistic\Operation\StatisticOperationCommand;
+use App\Application\Command\Statistic\Operation\OperationCommand;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +18,7 @@ class StatisticController extends AbstractController
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(
      *     @OA\MediaType(mediaType="application/json",
-     *          @OA\Schema(ref=@Model(type=StatisticOperationCommand::class))
+     *          @OA\Schema(ref=@Model(type=OperationCommand::class))
      *     )
      * )
      * @Security(name="Bearer")
@@ -26,6 +26,6 @@ class StatisticController extends AbstractController
      */
     public function operation(): Response
     {
-        return $this->response($this->handle(StatisticOperationCommand::class));
+        return $this->response($this->handle(OperationCommand::class));
     }
 }

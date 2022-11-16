@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class BinanceFillUserWalletHandler implements MessageHandlerInterface
+class FillUserWalletHandler implements MessageHandlerInterface
 {
     public function __construct(
         private SerializerInterface $serializer,
@@ -29,7 +29,7 @@ class BinanceFillUserWalletHandler implements MessageHandlerInterface
     /**
      * @throws Exception
      */
-    public function __invoke(BinanceFillUserWalletCommand $command): ResponseInterface
+    public function __invoke(FillUserWalletCommand $command): ResponseInterface
     {
         $this->userService->setUser(
             $this->userRepository->find($command->getUserId())

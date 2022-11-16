@@ -10,6 +10,6 @@ use OpenApi\Annotations as OA;
  *     example={}
  * )
  */
-class UserInfoCommand extends AbstractCommand
+class InfoCommand extends AbstractCommand
 {
 }

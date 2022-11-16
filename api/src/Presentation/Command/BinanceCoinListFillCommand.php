@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Command;
 
-use App\Application\Command\Binance\FillCoinList\BinanceFillCoinListCommand as FillCoinListCommand;
+use App\Application\Command\Binance\FillCoinList\FillCoinListCommand as FillCoinListCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

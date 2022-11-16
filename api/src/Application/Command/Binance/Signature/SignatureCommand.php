@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *     }
  * )
  */
-class BinanceSignatureCommand extends AbstractCommand implements AsyncCommandInterface
+class SignatureCommand extends AbstractCommand implements AsyncCommandInterface
 {
     protected string $params;
 

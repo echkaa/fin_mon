@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Controller;
 
-use App\Application\Command\User\Info\UserInfoCommand;
+use App\Application\Command\User\Info\InfoCommand;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +18,7 @@ class UserController extends AbstractController
      * @OA\Response(response=Response::HTTP_OK, description="OK")
      * @OA\RequestBody(
      *     @OA\MediaType(mediaType="application/json",
-     *          @OA\Schema(ref=@Model(type=UserInfoCommand::class))
+     *          @OA\Schema(ref=@Model(type=InfoCommand::class))
      *     )
      * )
      * @Security(name="Bearer")
@@ -26,6 +26,6 @@ class UserController extends AbstractController
      */
     public function update(): Response
     {
-        return $this->response($this->handle(UserInfoCommand::class));
+        return $this->response($this->handle(InfoCommand::class));
     }
 }

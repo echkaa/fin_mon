@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Command;
 
-use App\Application\Command\MonoBankOperation\Setting\MonoBankOperationSettingCommand as MonoBankSettingCommand;
+use App\Application\Command\MonoBankOperation\Setting\SettingCommand as MonoBankSettingCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

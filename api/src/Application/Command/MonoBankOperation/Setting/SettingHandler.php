@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Throwable;
 
-class MonoBankOperationSettingHandler implements MessageHandlerInterface
+class SettingHandler implements MessageHandlerInterface
 {
     const PERIOD_UPLOAD_OPERATIONS = '1 week';
     private DateTime $startOperation;
@@ -30,7 +30,7 @@ class MonoBankOperationSettingHandler implements MessageHandlerInterface
         $this->startOperation = (new DateTime())->modify("-" . self::PERIOD_UPLOAD_OPERATIONS);
     }
 
-    public function __invoke(MonoBankOperationSettingCommand $command): void
+    public function __invoke(SettingCommand $command): void
     {
         $settingList = $this->settingRepository->getMonobankNotNullList();
 

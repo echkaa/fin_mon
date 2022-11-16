@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class SettingUpdateHandler implements MessageHandlerInterface
+class UpdateHandler implements MessageHandlerInterface
 {
     public function __construct(
         private SerializerInterface $serializer,
@@ -25,7 +25,7 @@ class SettingUpdateHandler implements MessageHandlerInterface
     /**
      * @throws Exception
      */
-    public function __invoke(SettingUpdateCommand $command): ResponseInterface
+    public function __invoke(UpdateCommand $command): ResponseInterface
     {
         $setting = $this->settingRepository->findBy([
             "user" => $this->userService->getCurrentUser()->getId(),
