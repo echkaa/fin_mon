@@ -13,7 +13,7 @@ use OpenApi\Annotations as OA;
  *     }
  * )
  */
-class StatisticCoinsCommand extends AbstractCommand implements AsyncCommandInterface
+class StatisticCoinsCommand extends AbstractCommand
 {
     protected ?array $coins = null;
 
