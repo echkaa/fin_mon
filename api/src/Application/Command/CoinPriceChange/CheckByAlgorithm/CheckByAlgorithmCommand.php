@@ -3,9 +3,9 @@
 namespace App\Application\Command\CoinPriceChange\CheckByAlgorithm;
 
 use App\Application\Command\AbstractCommand;
-use App\Domain\Contract\Command\AsyncCommandInterface;
+use App\Domain\Contract\Command\SyncCommandInterface;
 
-class CheckByAlgorithmCommand extends AbstractCommand implements AsyncCommandInterface
+class CheckByAlgorithmCommand extends AbstractCommand implements SyncCommandInterface
 {
     private string $timeRange;
 

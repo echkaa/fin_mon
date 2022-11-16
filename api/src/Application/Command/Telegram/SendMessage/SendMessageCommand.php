@@ -3,9 +3,9 @@
 namespace App\Application\Command\Telegram\SendMessage;
 
 use App\Application\Command\AbstractCommand;
-use App\Domain\Contract\Command\AsyncCommandInterface;
+use App\Domain\Contract\Command\SyncCommandInterface;
 
-class SendMessageCommand extends AbstractCommand implements AsyncCommandInterface
+class SendMessageCommand extends AbstractCommand implements SyncCommandInterface
 {
     private string $message;
     private int $telegramChatId;

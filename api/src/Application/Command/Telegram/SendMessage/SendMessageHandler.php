@@ -2,7 +2,6 @@
 
 namespace App\Application\Command\Telegram\SendMessage;
 
-use App\Application\Service\TelegramService;
 use App\Infrastructure\Adapter\TelegramAdapter;
 use Exception;
 use GuzzleHttp\Psr7\Response as HttpResponse;

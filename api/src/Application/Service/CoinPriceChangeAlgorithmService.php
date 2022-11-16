@@ -10,7 +10,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class CoinPriceChangeAlgorithmService
 {
-    private const NOTIFICATION_TEXT = "Coin: %s\r\nTimeRange: %s\r\nChangePercent: %.2F\r\nCurrentPrice: %.8F\r\nLastPrice: %.8F";
+    private const NOTIFICATION_TEXT = "Coin: %s\r\nTimeRange: %s\r\nChangePercent: %.2F\r\nPosition: %s\r\nCurrentPrice: %.8F\r\nLastPrice: %.8F";
 
     public function __construct(
         private CoinPriceChangeService $coinPriceChangeService,
@@ -30,7 +30,7 @@ class CoinPriceChangeAlgorithmService
 
     private function checkCoinChangePercent(CoinPriceChange $coinPriceChange): void
     {
-        if ($coinPriceChange->getChangePercent() >= abs($coinPriceChange->getReactionPercent())) {
+        if (abs($coinPriceChange->getChangePercent()) >= $coinPriceChange->getReactionPercent()) {
             $this->notificationUsers($coinPriceChange);
         }
     }
@@ -44,6 +44,7 @@ class CoinPriceChangeAlgorithmService
             $coinPriceChange->getCoin()->getName(),
             $coinPriceChange->getTimeRange(),
             $coinPriceChange->getChangePercent(),
+            $coinPriceChange->getChangePercent() >= 0 ? 'LONG' : 'SHORT',
             $coinPriceChange->getMarketPrice(),
             $coinPriceChange->getPreviousChange()->getMarketPrice(),
         );
