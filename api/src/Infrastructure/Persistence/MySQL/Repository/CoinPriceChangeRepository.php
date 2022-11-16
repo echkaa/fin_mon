@@ -35,6 +35,8 @@ class CoinPriceChangeRepository extends AbstractRepository implements CoinPriceC
             )
             ->leftJoin('cpc.coin', 'c')
             ->where('cpcc.id is null')
+            ->andWhere('cpc.timeRange like :timeRange')
+            ->setParameter('timeRange', $timeRange)
             ->groupBy('cpc.coin')
             ->orderBy('cpc.id', 'DESC')
             ->getQuery()
