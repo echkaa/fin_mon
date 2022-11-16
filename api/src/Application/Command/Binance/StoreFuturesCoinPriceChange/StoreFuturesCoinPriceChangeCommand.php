@@ -3,9 +3,9 @@
 namespace App\Application\Command\Binance\StoreFuturesCoinPriceChange;
 
 use App\Application\Command\AbstractCommand;
-use App\Domain\Contract\Command\SyncCommandInterface;
+use App\Domain\Contract\Command\AsyncCommandInterface;
 
-class StoreFuturesCoinPriceChangeCommand extends AbstractCommand implements SyncCommandInterface
+class StoreFuturesCoinPriceChangeCommand extends AbstractCommand implements AsyncCommandInterface
 {
     private string $timeRange;
 
